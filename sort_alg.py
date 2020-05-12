@@ -6,6 +6,7 @@ import time
 import random
 from bubble_sort import bubble_sort
 from quicksort import quick_sort
+from insertionsort import insertion
 import pre1
 
 #algs
@@ -112,6 +113,19 @@ def Start_alg():
         mycursor.execute(sqlformula, dades)
         mydb.commit()
 
+    elif alg_menu.get() == "Insertion Sort":
+        start = time.perf_counter()
+        insertion(data, drawdata, 0)
+        end = time.perf_counter()
+        timetext = str(f'Insertion {size} en {round(end - start, 2)} \n')
+        crono.insert(0.0, str(timetext))
+        dbi_alg = "insertion"
+        dbi_size = size
+        dbi_sec = round(end - start, 2)
+        sqlformula = ("INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)")
+        dades = (dbi_alg, dbi_size, dbi_sec)
+        mycursor.execute(sqlformula, dades)
+        mydb.commit()
     else:
         pass
 
@@ -125,9 +139,10 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=5, pady=5)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['Bubble Sort', 'Quick Sort', 'Merge Sort'])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['Bubble Sort', 'Quick Sort', 'Insertion Sort'
+    ,'Merge Sort'])
 alg_menu.grid(row=0, column=1, padx=5, pady=5)
-alg_menu.current([0])
+alg_menu.current([2])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
 
 Label(ui_frame, text="Nombre de barres ", bg='lightblue1').grid(row=1, column=0, padx=5, pady=5, sticky=W)
