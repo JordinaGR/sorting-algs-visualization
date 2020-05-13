@@ -7,6 +7,7 @@ import random
 from bubble_sort import bubble_sort
 from quicksort import quick_sort
 from insertionsort import insertion
+from linear_search import linear
 import pre1
 
 #algs
@@ -66,7 +67,7 @@ def generate():
     try:
         size = int(sizeEntry.get())
     except:
-        size = 'Pre1'
+        size = ' Pre1 '
 
     data = []
     if pre_det.get() == 'Pre1':
@@ -78,6 +79,7 @@ def generate():
         random.shuffle(data)
 
     drawdata(data, ['black' for x in range(len(data))])
+
 
 def Start_alg():
     global data
@@ -126,9 +128,27 @@ def Start_alg():
         dades = (dbi_alg, dbi_size, dbi_sec)
         mycursor.execute(sqlformula, dades)
         mydb.commit()
+
     else:
         pass
 
+def selected_search():
+    global nEntry
+    global ser_menu
+    global data
+    global size
+
+    try:
+        n = int(nEntry.get())
+    except:
+        n = 2
+
+    if ser_menu.get() == "Linear Search":
+        start = time.perf_counter()
+        linear(data, n, drawdata, 0)
+        end = time.perf_counter()
+        timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
+        crono.insert(0.0, str(timetext))
 
 # frames
 ui_frame = Frame(root, width=1800, height=150, bg="lightblue1")
@@ -139,26 +159,34 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=5, pady=5)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['Bubble Sort', 'Quick Sort', 'Insertion Sort'
-    ,'Merge Sort'])
-alg_menu.grid(row=0, column=1, padx=5, pady=5)
-alg_menu.current([2])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Quick Sort', 'Insertion Sort'])
+alg_menu.grid(row=0, column=1, padx=2, pady=2)
+alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
 
-Label(ui_frame, text="Nombre de barres ", bg='lightblue1').grid(row=1, column=0, padx=5, pady=5, sticky=W)
+Label(ui_frame, text="Search:", bg="lightblue1").grid(row=1, column=0, padx=5, pady=5)
+ser_menu = Combobox(ui_frame, textvariable=selected_search, values=['No' ,'Linear Search', 'Binary Search'])
+ser_menu.grid(row=1, column=1, padx=2, pady=2)
+ser_menu.current([0])
+nEntry = Entry(ui_frame, width=10)
+nEntry.grid(row=1, column=2, padx=2, pady=2, sticky=W)
+
+Label(ui_frame, text="Nombre de barres ", bg='lightblue1').grid(row=2, column=0, padx=5, pady=5, sticky=W)
 sizeEntry = Entry(ui_frame, width=15)
-sizeEntry.grid(row=1, column=1, padx=5, pady=5, sticky=W)
+sizeEntry.grid(row=2, column=1, padx=2, pady=2, sticky=W)
 
 #speed = Scale(ui_frame, from_=20, to=10, length=200, orient=HORIZONTAL)
 #speed.grid(row=1, column=2, padx=5, pady=5)
 
 pre_det = Combobox(ui_frame, textvariable=dades_pre, values=['No', 'Pre1'])
-pre_det.grid(row=1, column=2, padx=5, pady=5)
+pre_det.grid(row=1, column=3, padx=2, pady=2)
 pre_det.current([0])
 
-crono = Text(ui_frame, width=25, height=6, state='normal')
+crono = Text(ui_frame, width=35, height=6, state='normal')
 crono.grid(row=0, column=3)
 
-Button(ui_frame, text='Order!', font=("arial", 18), command=Start_alg, bg='red').grid(row=2, padx=5, pady=5)
-
+order = Button(ui_frame, text='Order!', font=("arial", 18), command=Start_alg, bg='red')
+order.grid(row=2, column=2, padx=2, pady=2)
+order = Button(ui_frame, text='Find', font=("arial", 18), command=selected_search, bg='red')
+order.grid(row=2, column=3, padx=2, pady=2)
 root.mainloop()

@@ -22,8 +22,3 @@ def insertion(data, drawdata, speed):
             k += 1
     drawdata(data, ['green' for x in range(len(data))])
     time.sleep(speed)
-
-'''    print(data)
-
-data = [4, 2, 3, 1, 5, 2, 5, 6, 7, 3, 5, 7, 8, 4]
-insertion(data)'''
