@@ -8,6 +8,7 @@ from bubble_sort import bubble_sort
 from quicksort import quick_sort
 from insertionsort import insertion
 from linear_search import linear
+from binary_search import binary
 import pre1
 
 #algs
@@ -88,14 +89,14 @@ def Start_alg():
 
     if alg_menu.get() == "Bubble Sort":
         start = time.perf_counter()
-        bubble_sort(data, drawdata, 0.001)
+        bubble_sort(data, drawdata, 0)
         end = time.perf_counter()
         timetext = str(f'Bubble {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
         dbb_alg = "bubble"
         dbb_size = size
         dbb_sec = round(end - start, 2)
-        sqlformula = ("INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)")
+        sqlformula = "INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)"
         dades = (dbb_alg, dbb_size, dbb_sec)
         mycursor.execute(sqlformula, dades)
         mydb.commit()
@@ -110,7 +111,7 @@ def Start_alg():
         dbq_alg = "quick"
         dbq_size = size
         dbq_sec = round(end - start, 2)
-        sqlformula = ("INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)")
+        sqlformula = "INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)"
         dades = (dbq_alg, dbq_size, dbq_sec)
         mycursor.execute(sqlformula, dades)
         mydb.commit()
@@ -124,7 +125,7 @@ def Start_alg():
         dbi_alg = "insertion"
         dbi_size = size
         dbi_sec = round(end - start, 2)
-        sqlformula = ("INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)")
+        sqlformula = "INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)"
         dades = (dbi_alg, dbi_size, dbi_sec)
         mycursor.execute(sqlformula, dades)
         mydb.commit()
@@ -149,16 +150,21 @@ def selected_search():
         end = time.perf_counter()
         timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
         crono.insert(0.0, str(timetext))
+    elif ser_menu.get() == 'Binary Search':
+        binary(data, n, drawdata, 1)
+
+    else:
+        pass
 
 # frames
-ui_frame = Frame(root, width=1800, height=150, bg="lightblue1")
-ui_frame.grid(row=0, column=0, padx=0, pady=2)
+ui_frame = Frame(root, width=1900, height=150, bg="lightblue1")
+ui_frame.grid(row=0, column=0, padx=0, pady=0)
 
-canvas = Canvas(root, width=1900, height=750, bg="white")
+canvas = Canvas(root, width=1800, height=750, bg="white")
 canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
-Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=5, pady=5)
+Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
 alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Quick Sort', 'Insertion Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
