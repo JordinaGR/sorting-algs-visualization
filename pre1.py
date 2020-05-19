@@ -2,8 +2,6 @@ import random
 
 pre1 = []
 
-for i in range(1, 20):
+for i in range(1, 30):
     pre1.append(i)
-random.shuffle(pre1)
-
-
+#random.shuffle(pre1)

@@ -160,7 +160,7 @@ def selected_search():
 ui_frame = Frame(root, width=1900, height=150, bg="lightblue1")
 ui_frame.grid(row=0, column=0, padx=0, pady=0)
 
-canvas = Canvas(root, width=1800, height=750, bg="white")
+canvas = Canvas(root, width=1880, height=750, bg="white")
 canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
