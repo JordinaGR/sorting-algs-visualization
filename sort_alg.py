@@ -79,7 +79,7 @@ def generate():
             data.append(n)
         random.shuffle(data)
 
-    drawdata(data, ['black' for x in range(len(data))])
+    drawdata(data, ['black' for x in range(len(data)+1)])
 
 
 def Start_alg():
@@ -144,17 +144,24 @@ def selected_search():
     except:
         n = 2
 
-    if ser_menu.get() == "Linear Search":
-        start = time.perf_counter()
-        linear(data, n, drawdata, 0)
-        end = time.perf_counter()
-        timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
+    if n > size:
+        print('error')
+        timetext = str(f'Error index out of range {n}\n')
         crono.insert(0.0, str(timetext))
-    elif ser_menu.get() == 'Binary Search':
-        binary(data, n, drawdata, 1)
 
     else:
-        pass
+
+        if ser_menu.get() == "Linear Search":
+            start = time.perf_counter()
+            linear(data, n, drawdata, 0)
+            end = time.perf_counter()
+            timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
+            crono.insert(0.0, str(timetext))
+        elif ser_menu.get() == 'Binary Search':
+            binary(data, n, drawdata, 1)
+
+        else:
+            pass
 
 # frames
 ui_frame = Frame(root, width=1900, height=150, bg="lightblue1")
