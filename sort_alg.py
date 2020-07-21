@@ -8,8 +8,12 @@ from bubble_sort import bubble_sort
 from quicksort import quick_sort
 from insertionsort import insertion
 from linear_search import linear
-from binary_search import binary
-import pre1
+from pre import pre1
+from pre import pre15
+from pre import pre20
+from pre import pre30
+from pre import pre40
+from pre import pre50
 
 #algs
     #merge sort
@@ -38,7 +42,11 @@ selected_alg = StringVar()
 dades_pre = StringVar()
 data = []
 pre1 = pre1.pre1
-
+pre15 = pre15.pre15
+pre20 = pre20.pre20
+pre30 = pre30.pre30
+pre40 = pre40.pre40
+pre50 = pre50.pre50
 
 def drawdata(data, colorarray):
 
@@ -63,24 +71,52 @@ def drawdata(data, colorarray):
 def generate():
     global data
     global pre1
+    global pre15
+    global pre20
+    global pre30
+    global pre40
+    global pre50
     global size
 
     try:
-        size = int(sizeEntry.get())
+        try:
+            size = int(sizeEntry.get())
+        except ValueError:
+            size = 0
     except:
-        size = ' Pre1 '
+        size = 'Pre'
 
     data = []
     if pre_det.get() == 'Pre1':
         for u in pre1:
             data.append(u)
+
+    elif pre_det.get() == 'Pre15':
+        for u in pre15:
+            data.append(u)
+
+    elif pre_det.get() == 'Pre20':
+        for u in pre20:
+            data.append(u)
+
+    elif pre_det.get() == 'Pre30':
+        for u in pre30:
+            data.append(u)
+
+    elif pre_det.get() == 'Pre40':
+        for u in pre40:
+            data.append(u)
+
+    elif pre_det.get() == 'Pre50':
+        for u in pre50:
+            data.append(u)
+
     else:
         for n in range(1, size + 1):
             data.append(n)
         random.shuffle(data)
 
     drawdata(data, ['black' for x in range(len(data)+1)])
-
 
 def Start_alg():
     global data
@@ -144,24 +180,14 @@ def selected_search():
     except:
         n = 2
 
-    if n > size:
-        print('error')
-        timetext = str(f'Error index out of range {n}\n')
+    if ser_menu.get() == "Linear Search":
+        start = time.perf_counter()
+        linear(data, n, drawdata, 0)
+        end = time.perf_counter()
+        timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
         crono.insert(0.0, str(timetext))
-
     else:
-
-        if ser_menu.get() == "Linear Search":
-            start = time.perf_counter()
-            linear(data, n, drawdata, 0)
-            end = time.perf_counter()
-            timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
-            crono.insert(0.0, str(timetext))
-        elif ser_menu.get() == 'Binary Search':
-            binary(data, n, drawdata, 1)
-
-        else:
-            pass
+        pass
 
 # frames
 ui_frame = Frame(root, width=1900, height=150, bg="lightblue1")
@@ -178,7 +204,7 @@ alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
 
 Label(ui_frame, text="Search:", bg="lightblue1").grid(row=1, column=0, padx=5, pady=5)
-ser_menu = Combobox(ui_frame, textvariable=selected_search, values=['No' ,'Linear Search', 'Binary Search'])
+ser_menu = Combobox(ui_frame, textvariable=selected_search, values=['No' ,'Linear Search'])
 ser_menu.grid(row=1, column=1, padx=2, pady=2)
 ser_menu.current([0])
 nEntry = Entry(ui_frame, width=10)
@@ -188,10 +214,7 @@ Label(ui_frame, text="Nombre de barres ", bg='lightblue1').grid(row=2, column=0,
 sizeEntry = Entry(ui_frame, width=15)
 sizeEntry.grid(row=2, column=1, padx=2, pady=2, sticky=W)
 
-#speed = Scale(ui_frame, from_=20, to=10, length=200, orient=HORIZONTAL)
-#speed.grid(row=1, column=2, padx=5, pady=5)
-
-pre_det = Combobox(ui_frame, textvariable=dades_pre, values=['No', 'Pre1'])
+pre_det = Combobox(ui_frame, textvariable=dades_pre, values=['No', 'Pre1', 'Pre15', 'Pre20', 'Pre30', 'Pre40', 'Pre50'])
 pre_det.grid(row=1, column=3, padx=2, pady=2)
 pre_det.current([0])
 
