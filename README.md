@@ -1,6 +1,7 @@
 # sorting and searching algorithms visualization
 
 Vid showing how it works 22/7/2020 version: https://youtu.be/yMG3x2RfGrk
+
 Explanation of the program on the description of the video.
 
 Sorting and searching algorithms visualization with python 3.8 and tkinter. The graphics are pretty bad I know, the purpose of this is the algorithm implementation.
