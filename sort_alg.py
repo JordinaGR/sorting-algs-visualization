@@ -79,36 +79,19 @@ def generate():
     global size
 
     try:
-        try:
-            size = int(sizeEntry.get())
-        except ValueError:
-            size = 0
-    except:
-        size = 'Pre'
+        size = int(sizeEntry.get())
+    except ValueError:
+        size = 0
+
 
     data = []
-    if pre_det.get() == 'Pre1':
-        for u in pre1:
-            data.append(u)
 
-    elif pre_det.get() == 'Pre15':
-        for u in pre15:
-            data.append(u)
+    pre_dict = {'Pre1':pre1, 'Pre15':pre15, 'Pre20':pre20, 'Pre30':pre30, 'Pre40':pre40, 'Pre50':pre50}
 
-    elif pre_det.get() == 'Pre20':
-        for u in pre20:
-            data.append(u)
+    if pre_det.get() != 'No':
+        which_pre = pre_det.get()
 
-    elif pre_det.get() == 'Pre30':
-        for u in pre30:
-            data.append(u)
-
-    elif pre_det.get() == 'Pre40':
-        for u in pre40:
-            data.append(u)
-
-    elif pre_det.get() == 'Pre50':
-        for u in pre50:
+        for u in pre_dict.get(which_pre):
             data.append(u)
 
     else:
