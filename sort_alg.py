@@ -24,6 +24,7 @@ from pre import pre50
     #heap sort
 #arreglar pre1
 
+# connect to database
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -31,13 +32,13 @@ mydb = mysql.connector.connect(
     database="sort_algdb")
 mycursor = mydb.cursor()
 
-
+# start a tkinter window
 root = Tk()
 root.maxsize(2000, 2000)
 root.config(bg="black")
 root.title("Sorting algorithms visualization")
 
-# var
+# vars
 selected_alg = StringVar()
 dades_pre = StringVar()
 data = []
@@ -48,6 +49,7 @@ pre30 = pre30.pre30
 pre40 = pre40.pre40
 pre50 = pre50.pre50
 
+# draw the rectangles
 def drawdata(data, colorarray):
 
     canvas.delete("all")
@@ -66,8 +68,9 @@ def drawdata(data, colorarray):
 
         canvas.create_rectangle(x0, y0, x1, y1, fill=colorarray[i])
 
-    root.update_idletasks()
+    root.update_idletasks() # update the triangles
 
+# generate an array
 def generate():
     global data
     global pre1
@@ -78,7 +81,7 @@ def generate():
     global pre50
     global size
 
-    try:
+    try:    # if the size is not valid, set a default
         size = int(sizeEntry.get())
     except ValueError:
         size = 0
@@ -86,6 +89,7 @@ def generate():
 
     data = []
 
+    # check if there's a default set selectet, if it is, append that data to the list
     pre_dict = {'Pre1':pre1, 'Pre15':pre15, 'Pre20':pre20, 'Pre30':pre30, 'Pre40':pre40, 'Pre50':pre50}
 
     if pre_det.get() != 'No':
@@ -93,32 +97,32 @@ def generate():
 
         for u in pre_dict.get(which_pre):
             data.append(u)
-
+    # if there's no defaul selected, create a random list with the size you selected
     else:
         for n in range(1, size + 1):
             data.append(n)
         random.shuffle(data)
 
-    drawdata(data, ['black' for x in range(len(data)+1)])
+    drawdata(data, ['black' for x in range(len(data)+1)]) # call the drawdata function and create the squares
 
 def Start_alg():
     global data
     global size
     global crono
 
-    if alg_menu.get() == "Bubble Sort":
-        start = time.perf_counter()
-        bubble_sort(data, drawdata, 0)
-        end = time.perf_counter()
-        timetext = str(f'Bubble {size} en {round(end - start, 2)} \n')
-        crono.insert(0.0, str(timetext))
-        dbb_alg = "bubble"
+    if alg_menu.get() == "Bubble Sort": # if buble sort selected:
+        start = time.perf_counter() # start a timer
+        bubble_sort(data, drawdata, 0)  # call the sort function
+        end = time.perf_counter()   # stop the timer when the function ends
+        timetext = str(f'Bubble {size} en {round(end - start, 2)} \n')  # write the timing in the program
+        crono.insert(0.0, str(timetext))    
+        dbb_alg = "bubble"  # create variables to insert them in the SQL table
         dbb_size = size
         dbb_sec = round(end - start, 2)
         sqlformula = "INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)"
         dades = (dbb_alg, dbb_size, dbb_sec)
         mycursor.execute(sqlformula, dades)
-        mydb.commit()
+        mydb.commit()   # insert the data
 
     elif alg_menu.get() == "Quick Sort":
         start = time.perf_counter()
@@ -157,20 +161,18 @@ def selected_search():
     global ser_menu
     global data
     global size
-
+    # check if the value is correct, if it's not, set a defaul of 2
     try:
         n = int(nEntry.get())
     except:
         n = 2
 
     if ser_menu.get() == "Linear Search":
-        start = time.perf_counter()
-        linear(data, n, drawdata, 0)
-        end = time.perf_counter()
+        start = time.perf_counter() # start timer
+        linear(data, n, drawdata, 0)    # call the function
+        end = time.perf_counter()   # stop timer
         timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
-    else:
-        pass
+        crono.insert(0.0, str(timetext))    # write the times in the screen
 
 # frames
 ui_frame = Frame(root, width=1900, height=150, bg="lightblue1")
