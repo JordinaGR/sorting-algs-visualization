@@ -12,4 +12,6 @@ The main file is the sort_alg.py. The others are algorithms.
 
 The pre folder contains files with programs that creates arrays. They get stored in the 'pre_something' variable (the pre15 contains 15 numbers, the pre30 30 numbers) so you can compare the timing with the same array but different algorithms.
 
+The file sorting_algs_noDB.py is the same as the sort_algs.py but with the grafics compatible for all the computers and without a database, so you can run it on almost all the machines and displays.
+
 Thanks for checking it out.
