@@ -4,10 +4,10 @@ from tkinter import *
 from tkinter.ttk import Combobox
 import time
 import random
-from bubble_sort import bubble_sort
-from quicksort import quick_sort
-from insertionsort import insertion
-from linear_search import linear
+from algs.bubble_sort import bubble_sort
+from algs.quick_sort import quick_sort
+from algs.insertion_sort import insertion
+from algs.linear_search import linear
 from pre import pre1
 from pre import pre15
 from pre import pre20
@@ -22,13 +22,13 @@ from pre import pre50
 
     #comb sort
     #heap sort
-#arreglar pre1
+
 
 # connect to database
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd=os.environ.get('MYSQL_PASSWORD'),
+    passwd='ManjaroLinux29',
     database="sort_algdb")
 mycursor = mydb.cursor()
 
