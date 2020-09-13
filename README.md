@@ -1,6 +1,7 @@
 # sorting and searching algorithms visualization
 
 Vid showing how it works 22/07/2020 version: https://youtu.be/yMG3x2RfGrk
+
 Vid showing how it works 13/09/2020 version: https://youtu.be/ahkvwWWYBDU 	(with merge sort)
 
 
