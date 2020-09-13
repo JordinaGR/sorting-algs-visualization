@@ -183,7 +183,7 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Quick Sort', 'Insertion Sort'])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Insertion Sort', 'Quick Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)

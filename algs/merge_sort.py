@@ -1,26 +1,54 @@
-def merge(left,right):
-    sort = []
+import time
+
+def merge_sort(data, drawdata, speed):
+    merge_sort2(data, 0, len(data)-1, drawdata, speed)
+    
+def merge_sort2(data, left, right, drawdata, speed):
+    if left < right:
+        middle = (left + right) // 2
+        merge_sort2(data, left, middle, drawdata, speed)
+        merge_sort2(data, middle+1, right, drawdata, speed)
+        merge(data, left, middle, right, drawdata, speed)
+
+def merge(data, left, middle, right, drawdata, speed):
+    drawdata(data, color(len(data), left, middle, right))
+    time.sleep(speed)
+
+    left_side = data[left:middle+1]
+    right_side = data[middle+1:right+1]
+
     i, j = 0, 0
-    while i < len(left) and j < len(right):
-        if left[i] < right[j]:
-            sort.append(left[i])
+
+    for k in range(left, right+1):
+        if i < len(left_side) and j < len(right_side):
+            if left_side[i] <= right_side[j]:
+                data[k] = left_side[i]
+                i += 1
+            else:
+                data[k] = right_side[j]
+                j += 1
+
+        elif i < len(left_side):
+            data[k] = left_side[i]
             i += 1
         else:
-            sort.append(right[j])
+            data[k] = right_side[j]
             j += 1
+    
+    drawdata(data, ["green" if x >= left and x <= right else "black" for x in range(len(data))])
+    time.sleep(speed)
 
-    sort += left[i:]
-    sort += right[j:]
-    return sort
+def color(lenn, left, middle, right):
+    color_list = []
 
-def merge_sort(data):
-    if len(data) == 1:
-        return data
-    middle = len(data) // 2
-    left_data = merge_sort(data[:middle])
-    right_data = merge_sort(data[middle:])
-    return merge(left_data, right_data)
+    for i in range(lenn):
+        if i >= left and i <= right:
+            color_list.append('red')
+            if i <= left and i >= middle:
+                color_list.append('red')
+            else:
+                color_list.append('red')
+        else:
+            color_list.append('black')
 
-
-data = [10,5,2,3,7,4,8,9] 
-print(merge_sort(data))
+    return color_list
