@@ -16,7 +16,7 @@ from pre import pre40
 from pre import pre50
 
 #algs
-    #merge sort
+
     #shell sort
     #radix sort
 
@@ -28,7 +28,7 @@ from pre import pre50
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd='ManjaroLinux29',
+    passwd=passw,
     database="sort_algdb")
 mycursor = mydb.cursor()
 
@@ -150,6 +150,20 @@ def Start_alg():
         dbi_sec = round(end - start, 2)
         sqlformula = "INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)"
         dades = (dbi_alg, dbi_size, dbi_sec)
+        mycursor.execute(sqlformula, dades)
+        mydb.commit()
+
+    elif alg_menu.get() == "Merge Sort":
+        start = time.perf_counter()
+        merge_sort(data, drawdata, 0)
+        end = time.perf_counter()
+        timetext = str(f'Merge {size} en {round(end - start, 2)} \n')
+        crono.insert(0.0, str(timetext))
+        dbm_alg = "merge"
+        dbm_size = size
+        dbm_sec = round(end - start, 2)
+        sqlformula = "INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)"
+        dades = (dbm_alg, dbm_size, dbm_sec)
         mycursor.execute(sqlformula, dades)
         mydb.commit()
 
