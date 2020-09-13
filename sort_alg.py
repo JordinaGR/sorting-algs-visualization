@@ -8,6 +8,7 @@ from algs.bubble_sort import bubble_sort
 from algs.quick_sort import quick_sort
 from algs.insertion_sort import insertion
 from algs.linear_search import linear
+from algs.merge_sort import merge_sort
 from pre import pre1
 from pre import pre15
 from pre import pre20
@@ -16,13 +17,14 @@ from pre import pre40
 from pre import pre50
 
 #algs
-
     #shell sort
     #radix sort
 
     #comb sort
     #heap sort
 
+file1 = open("passw.txt", "r")
+passw = file1.readline()
 
 # connect to database
 mydb = mysql.connector.connect(
@@ -197,7 +199,7 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Insertion Sort', 'Quick Sort'])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
