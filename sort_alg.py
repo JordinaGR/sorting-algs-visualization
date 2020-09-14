@@ -28,10 +28,10 @@ passw = file1.readline()
 
 # connect to database
 mydb = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    passwd=passw,
-    database="sort_algdb")
+    host = "localhost",
+    user = "root",
+    passwd = passw,
+    database = "sort_algdb")
 mycursor = mydb.cursor()
 
 # start a tkinter window

@@ -1,4 +1,7 @@
 import time
+import sys
+
+sys.setrecursionlimit(100000000)
 
 def insertion(data, drawdata, speed):
     k = 0
