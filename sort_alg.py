@@ -22,7 +22,7 @@ from pre import pre50
     #radix sort
 
     #comb sort
-    #heap sort
+    #heap sortt
 
 file1 = open("passw.txt", "r")
 passw = file1.readline()

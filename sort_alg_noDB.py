@@ -8,6 +8,7 @@ from algs.quick_sort import quick_sort
 from algs.insertion_sort import insertion
 from algs.linear_search import linear
 from algs.merge_sort import merge_sort
+from algs.selection_sort import selection
 from pre import pre1
 from pre import pre15
 from pre import pre20
@@ -126,6 +127,14 @@ def Start_alg():
         end = time.perf_counter()
         timetext = str(f'Merge {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
+
+    elif alg_menu.get() == "Selection Sort":
+        start = time.perf_counter()
+        selection(data, drawdata, 0)
+        drawdata(data, ['green' for x in range(len(data))])
+        end = time.perf_counter()
+        timetext = str(f'Selection {size} en {round(end - start, 2)} \n')
+        crono.insert(0.0, str(timetext))
     
     else:
         pass
@@ -157,7 +166,7 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
