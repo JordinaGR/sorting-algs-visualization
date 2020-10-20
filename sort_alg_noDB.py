@@ -9,6 +9,8 @@ from algs.insertion_sort import insertion
 from algs.linear_search import linear
 from algs.merge_sort import merge_sort
 from algs.selection_sort import selection
+from algs.binary_search import binary
+from algs.opti_bubble_sort import opti_bubble
 from pre import pre1
 from pre import pre15
 from pre import pre20
@@ -135,6 +137,13 @@ def Start_alg():
         end = time.perf_counter()
         timetext = str(f'Selection {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
+
+    elif alg_menu.get() == "Opti Bubble Sort":
+        start = time.perf_counter()
+        opti_bubble(data, drawdata, 0)
+        end = time.perf_counter()
+        timetext = str(f'Opti bubble {size} en {round(end - start, 2)} \n')
+        crono.insert(0.0, str(timetext))
     
     else:
         pass
@@ -152,7 +161,7 @@ def selected_search():
 
     if ser_menu.get() == "Linear Search":
         start = time.perf_counter() # start timer
-        linear(data, n, drawdata, 0)    # call the function
+        binary(data, n, drawdata, 0)    # call the function
         end = time.perf_counter()   # stop timer
         timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
         crono.insert(0.0, str(timetext))    # write the times in the screen
@@ -166,13 +175,13 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
 
 Label(ui_frame, text="Search:", bg="lightblue1").grid(row=1, column=0, padx=5, pady=5)
-ser_menu = Combobox(ui_frame, textvariable=selected_search, values=['No' ,'Linear Search'])
+ser_menu = Combobox(ui_frame, textvariable=selected_search, values=['No' ,'Linear Search', 'Binary Search'])
 ser_menu.grid(row=1, column=1, padx=2, pady=2)
 ser_menu.current([0])
 nEntry = Entry(ui_frame, width=10)
