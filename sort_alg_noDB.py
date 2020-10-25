@@ -11,6 +11,8 @@ from algs.merge_sort import merge_sort
 from algs.selection_sort import selection
 from algs.binary_search import binary
 from algs.opti_bubble_sort import opti_bubble
+from algs.random_sort import random_sorts
+from algs import random_sort
 from pre import pre1
 from pre import pre15
 from pre import pre20
@@ -32,6 +34,7 @@ root.title("Sorting algorithms visualization")
 selected_alg = StringVar()
 dades_pre = StringVar()
 data = []
+trys = random_sort.trys
 pre1 = pre1.pre1
 pre15 = pre15.pre15
 pre20 = pre20.pre20
@@ -144,6 +147,13 @@ def Start_alg():
         end = time.perf_counter()
         timetext = str(f'Opti bubble {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
+
+    elif alg_menu.get() == "Random Sort":
+        start = time.perf_counter()
+        random_sorts(data, drawdata, 0)
+        end = time.perf_counter()
+        timetext = str(f'Random {size} en {round(end - start, 2)} i {len(trys)} intents \n')
+        crono.insert(0.0, str(timetext))
     
     else:
         pass
@@ -161,10 +171,18 @@ def selected_search():
 
     if ser_menu.get() == "Linear Search":
         start = time.perf_counter() # start timer
-        binary(data, n, drawdata, 0)    # call the function
+        linear(data, n, drawdata, 0)    # call the function
         end = time.perf_counter()   # stop timer
         timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
         crono.insert(0.0, str(timetext))    # write the times in the screen
+
+    elif ser_menu.get() == "Binary Search":
+        start = time.perf_counter()
+        mid = data[len(data) // 2]
+        binary(data, n, 0, len(data)-1 ,drawdata, 0.5)
+        end = time.perf_counter()
+        timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
+        crono.insert(0.0, str(timetext))
 
 # frames
 ui_frame = Frame(root, width=widthr, height=heightr/4, bg="lightblue1")
@@ -175,7 +193,7 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Random Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
@@ -184,8 +202,10 @@ Label(ui_frame, text="Search:", bg="lightblue1").grid(row=1, column=0, padx=5, p
 ser_menu = Combobox(ui_frame, textvariable=selected_search, values=['No' ,'Linear Search', 'Binary Search'])
 ser_menu.grid(row=1, column=1, padx=2, pady=2)
 ser_menu.current([0])
+#ser_menu.current(2) # delete this after testing
 nEntry = Entry(ui_frame, width=10)
 nEntry.grid(row=1, column=2, padx=2, pady=2, sticky=W)
+#nEntry.insert(END, 30) #delete this after testing
 
 Label(ui_frame, text="Nombre de barres ", bg='lightblue1').grid(row=2, column=0, padx=5, pady=5, sticky=W)
 sizeEntry = Entry(ui_frame, width=15)
@@ -194,6 +214,8 @@ sizeEntry.grid(row=2, column=1, padx=2, pady=2, sticky=W)
 pre_det = Combobox(ui_frame, textvariable=dades_pre, values=['No', 'Pre1', 'Pre15', 'Pre20', 'Pre30', 'Pre40', 'Pre50'])
 pre_det.grid(row=1, column=3, padx=2, pady=2)
 pre_det.current([0])
+#pre_det.current(1) # delete this after testing
+
 
 crono = Text(ui_frame, width=35, height=6, state='normal')
 crono.grid(row=0, column=3)
