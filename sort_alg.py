@@ -224,6 +224,9 @@ def selected_search():
     except:
         n = 2
 
+    if int(nEntry.get()) > len(data):
+        crono.insert(0.0, 'The data is not in here \n')
+
     if ser_menu.get() == "Linear Search":
         start = time.perf_counter() # start timer
         linear(data, n, drawdata, 0)    # call the function
