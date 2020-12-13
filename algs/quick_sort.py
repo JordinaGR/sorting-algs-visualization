@@ -30,6 +30,7 @@ def quick_sort(data, head, tail, drawdata, speed):
 
     if head < tail:
         partindex = partition(data, head, tail, drawdata, speed)
+        
         #left
         quick_sort(data, head, partindex-1, drawdata, speed)
 

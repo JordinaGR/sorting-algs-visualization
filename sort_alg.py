@@ -25,7 +25,7 @@ from pre import pre50
     #comb sort
     #heap sortt
 
-file1 = open("passw.txt", "r")
+file1 = open("/home/jordina/Desktop/programes python/sorting_alg/passw.txt", "r")
 passw = file1.readline()
 
 # connect to database
@@ -38,7 +38,10 @@ mycursor = mydb.cursor()
 
 # start a tkinter window
 root = Tk()
-root.maxsize(2000, 2000)
+widthr = root.winfo_screenwidth()
+heightr = root.winfo_screenheight()
+root.maxsize(root.winfo_screenwidth(), root.winfo_screenheight())
+root.minsize(root.winfo_screenwidth(), root.winfo_screenheight())
 root.config(bg="black")
 root.title("Sorting algorithms visualization")
 
@@ -57,8 +60,8 @@ pre50 = pre50.pre50
 def drawdata(data, colorarray):
 
     canvas.delete("all")
-    c_height = 750
-    c_width = 1900
+    c_height = (heightr/4)*3
+    c_width = widthr
     x_width = c_width / (len(data) + 1)
     offset = 0
     spacing = 0
@@ -66,7 +69,7 @@ def drawdata(data, colorarray):
 
     for i, height in enumerate(normalizeddata):
         x0 = i * x_width + offset + spacing
-        y0 = c_height - height * 700
+        y0 = c_height - height * ((heightr/3)+(heightr/3))
         x1 = (i+1) * x_width + offset
         y1 = c_height
 
@@ -76,14 +79,7 @@ def drawdata(data, colorarray):
 
 # generate an array
 def generate():
-    global data
-    global pre1
-    global pre15
-    global pre20
-    global pre30
-    global pre40
-    global pre50
-    global size
+    global data, pre1, pre15, pre20, pre30, pre40, pre50, size
 
     try:    # if the size is not valid, set a default
         size = int(sizeEntry.get())
@@ -110,9 +106,7 @@ def generate():
     drawdata(data, ['black' for x in range(len(data)+1)]) # call the drawdata function and create the squares
 
 def Start_alg():
-    global data
-    global size
-    global crono
+    global data, size, crono
 
     if alg_menu.get() == "Bubble Sort": # if buble sort selected:
         start = time.perf_counter() # start a timer
@@ -203,10 +197,8 @@ def Start_alg():
         pass
 
 def selected_search():
-    global nEntry
-    global ser_menu
-    global data
-    global size
+    global nEntry, ser_menu, data, size
+
     # check if the value is correct, if it's not, set a defaul of 2
     try:
         n = int(nEntry.get())
@@ -221,10 +213,10 @@ def selected_search():
         crono.insert(0.0, str(timetext))    # write the times in the screen
 
 # frames
-ui_frame = Frame(root, width=1900, height=150, bg="lightblue1")
+ui_frame = Frame(root, width=widthr, height=heightr/4, bg="lightblue1")
 ui_frame.grid(row=0, column=0, padx=0, pady=0)
 
-canvas = Canvas(root, width=1880, height=750, bg="white")
+canvas = Canvas(root, width=widthr, height=((heightr/4)*3), bg="white")
 canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
