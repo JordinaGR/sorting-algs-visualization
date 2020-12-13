@@ -157,19 +157,23 @@ def selected_search():
     except:
         n = 2
 
-    if ser_menu.get() == "Linear Search":
-        start = time.perf_counter() # start timer
-        linear(data, n, drawdata, 0)    # call the function
-        end = time.perf_counter()   # stop timer
-        timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))    # write the times in the screen
+    if int(nEntry.get()) > len(data):
+        crono.insert(0.0, 'The data is not in here \n')
 
-    elif ser_menu.get() == "Binary Search":
-        start = time.perf_counter()
-        binary(data, n, 0, len(data)-1, drawdata, 0.2)
-        end = time.perf_counter()
-        timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
+    else:
+        if ser_menu.get() == "Linear Search":
+            start = time.perf_counter() # start timer
+            linear(data, n, drawdata, 0)    # call the function
+            end = time.perf_counter()   # stop timer
+            timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
+            crono.insert(0.0, str(timetext))    # write the times in the screen
+
+        elif ser_menu.get() == "Binary Search":
+            start = time.perf_counter()
+            binary(data, n-1, 0, len(data)-1, drawdata, 0.5)
+            end = time.perf_counter()
+            timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
+            crono.insert(0.0, str(timetext))
 
 # frames
 ui_frame = Frame(root, width=widthr, height=heightr/4, bg="lightblue1")
