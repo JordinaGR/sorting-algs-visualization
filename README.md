@@ -1,4 +1,4 @@
-# sorting and searching algorithms visualization
+# Sorting and searching algorithms visualization
 
 Vid showing how it works 22/07/2020 version: https://youtu.be/yMG3x2RfGrk
 
@@ -15,7 +15,7 @@ The pre folder contains files with programs that creates arrays. They get stored
 
 The file sorting_algs_noDB.py is the same as the sort_algs.py but without a database, so you can run it on almost all the machines.
 
-##### The sorting algorithms currently implemented are:
+#### The sorting algorithms currently implemented are:
 - Bubble sort
 - Optimized bubble sort
 - Selection sort
@@ -24,7 +24,7 @@ The file sorting_algs_noDB.py is the same as the sort_algs.py but without a data
 - Merge sort
 - Random sort
 
-##### The searching algorithms currently implemented are:
+#### The searching algorithms currently implemented are:
 - Linear search
 - Binary search
 
