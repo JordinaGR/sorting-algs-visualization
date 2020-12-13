@@ -66,20 +66,12 @@ def drawdata(data, colorarray):
 
 # generate an array
 def generate():
-    global data
-    global pre1
-    global pre15
-    global pre20
-    global pre30
-    global pre40
-    global pre50
-    global size
+    global data, pre1, pre15, pre20, pre30, pre40, pre50, size
 
     try:    # if the size is not valid, set a default
         size = int(sizeEntry.get())
     except ValueError:
         size = 0
-
 
     data = []
 
@@ -100,9 +92,7 @@ def generate():
     drawdata(data, ['black' for x in range(len(data)+1)]) # call the drawdata function and create the squares
 
 def Start_alg():
-    global data
-    global size
-    global crono
+    global data, size, crono
 
     if alg_menu.get() == "Bubble Sort": # if buble sort selected:
         start = time.perf_counter() # start a timer
@@ -159,10 +149,8 @@ def Start_alg():
         pass
 
 def selected_search():
-    global nEntry
-    global ser_menu
-    global data
-    global size
+    global nEntry, ser_menu, data, size
+
     # check if the value is correct, if it's not, set a defaul of 2
     try:
         n = int(nEntry.get())
@@ -179,7 +167,7 @@ def selected_search():
     elif ser_menu.get() == "Binary Search":
         start = time.perf_counter()
         mid = data[len(data) // 2]
-        binary(data, n, 0, len(data)-1 ,drawdata, 0.5)
+        binary(data, n, 0, len(data)-1, drawdata, 0.2)
         end = time.perf_counter()
         timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
         crono.insert(0.0, str(timetext))
