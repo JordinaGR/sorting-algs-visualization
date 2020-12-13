@@ -1,5 +1,5 @@
-import mysql.connector
 import os
+import mysql.connector
 from tkinter import *
 from tkinter.ttk import Combobox
 import time
@@ -10,7 +10,10 @@ from algs.insertion_sort import insertion
 from algs.linear_search import linear
 from algs.merge_sort import merge_sort
 from algs.selection_sort import selection
+from algs.binary_search import binary
 from algs.opti_bubble_sort import opti_bubble
+from algs.random_sort import random_sorts
+from algs import random_sort
 from pre import pre1
 from pre import pre15
 from pre import pre20
@@ -55,6 +58,7 @@ pre20 = pre20.pre20
 pre30 = pre30.pre30
 pre40 = pre40.pre40
 pre50 = pre50.pre50
+trys = random_sort.trys
 
 # draw the rectangles
 def drawdata(data, colorarray):
@@ -192,7 +196,22 @@ def Start_alg():
         dades = (dbb_alg, dbb_size, dbb_sec)
         mycursor.execute(sqlformula, dades)
         mydb.commit()
-
+    
+    elif alg_menu.get() == "Random Sort":
+        start = time.perf_counter()
+        random_sorts(data, drawdata, 0)
+        end = time.perf_counter()
+        timetext = str(f'Random {size} en {round(end - start, 2)} i {len(trys)} intents \n')
+        crono.insert(0.0, str(timetext))
+        dbr_alg = "random"
+        dbr_size = size
+        dbr_sec = round(end - start, 2)
+        dbr_trys = len(trys)
+        sqlformula = "INSERT INTO sortdata (alg, size, sec, trys) VALUES (%s, %s, %s, %s)"
+        dades = (dbr_alg, dbr_size, dbr_sec, dbr_trys)
+        mycursor.execute(sqlformula, dades)
+        mydb.commit()
+    
     else:
         pass
 
@@ -211,6 +230,29 @@ def selected_search():
         end = time.perf_counter()   # stop timer
         timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
         crono.insert(0.0, str(timetext))    # write the times in the screen
+        sl_alg = "linear"
+        sl_size = size
+        sl_sec = round(end - start, 2)
+        sl_sdata = n
+        sqlformula = "INSERT INTO searchdata (alg, size, sec, sdata) VALUES (%s, %s, %s, %s)"
+        dades = (sl_alg, sl_size, sl_sec, sl_sdata)
+        mycursor.execute(sqlformula, dades)
+        mydb.commit()
+    
+    elif ser_menu.get() == "Binary Search":
+        start = time.perf_counter()
+        binary(data, n, 0, len(data)-1, drawdata, 0.2)
+        end = time.perf_counter()
+        timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
+        crono.insert(0.0, str(timetext))
+        sl_alg = "binary"
+        sl_size = size
+        sl_sec = round(end - start, 2)
+        sl_sdata = n
+        sqlformula = "INSERT INTO searchdata (alg, size, sec, sdata) VALUES (%s, %s, %s, %s)"
+        dades = (sl_alg, sl_size, sl_sec, sl_sdata)
+        mycursor.execute(sqlformula, dades)
+        mydb.commit()
 
 # frames
 ui_frame = Frame(root, width=widthr, height=heightr/4, bg="lightblue1")
@@ -221,13 +263,13 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort','Opti Bubble Sort','Selection Sort' ,'Insertion Sort', 'Quick Sort', 'Merge Sort'])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort','Opti Bubble Sort','Selection Sort' ,'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Random Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
 
 Label(ui_frame, text="Search:", bg="lightblue1").grid(row=1, column=0, padx=5, pady=5)
-ser_menu = Combobox(ui_frame, textvariable=selected_search, values=['No' ,'Linear Search'])
+ser_menu = Combobox(ui_frame, textvariable=selected_search, values=['No' ,'Linear Search', 'Binary Search'])
 ser_menu.grid(row=1, column=1, padx=2, pady=2)
 ser_menu.current([0])
 nEntry = Entry(ui_frame, width=10)

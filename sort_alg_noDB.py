@@ -166,7 +166,6 @@ def selected_search():
 
     elif ser_menu.get() == "Binary Search":
         start = time.perf_counter()
-        mid = data[len(data) // 2]
         binary(data, n, 0, len(data)-1, drawdata, 0.2)
         end = time.perf_counter()
         timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
