@@ -1,8 +1,12 @@
 # Sorting and searching algorithms visualization
 
-Vid showing how it works 22/07/2020 version: https://youtu.be/yMG3x2RfGrk
+Vids showing how it works (DD/MM/YYYY):
 
-Vid showing how it works 13/09/2020 version: https://youtu.be/ahkvwWWYBDU 	(with merge sort)
+1. 22/07/2020 version #1: https://youtu.be/yMG3x2RfGrk
+
+2. 13/09/2020 version #2: https://youtu.be/ahkvwWWYBDU 
+
+3. 16/12/2020 version #3: https://youtu.be/uF0zBXybNJ0
 
 
 Sorting and searching algorithms visualization with python 3.8 and tkinter. The graphics are pretty bad I know, the purpose of this is the algorithm implementation.
@@ -32,7 +36,7 @@ The file sort_alg_menu.py is the same but without a database and with the menu i
 
 ###### To do list:
 - ~~Create a separate menu window in another file~~
-- Be able to change speed and create the Entry on sort_alg_noDB
+- ~~Be able to change speed and create the Entry on sort_alg_noDB~~
 - Add keyboard shortcuts for the menu
 
 
