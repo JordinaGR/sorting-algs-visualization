@@ -92,7 +92,12 @@ def generate():
     drawdata(data, ['black' for x in range(len(data)+1)]) # call the drawdata function and create the squares
 
 def Start_alg():
-    global data, size, crono
+    global data, size, crono, speed_entry
+
+    try:
+        speed = float(speed_entry.get())
+    except:
+        speed = 0
 
     if alg_menu.get() == "Bubble Sort": # if buble sort selected:
         start = time.perf_counter() # start a timer
@@ -103,7 +108,7 @@ def Start_alg():
 
     elif alg_menu.get() == "Quick Sort":
         start = time.perf_counter()
-        quick_sort(data, 0, len(data)-1, drawdata, 0)
+        quick_sort(data, 0, len(data)-1, drawdata, speed)
         drawdata(data, ['green' for x in range(len(data))])
         end = time.perf_counter()
         timetext = str(f'Quick {size} en {round(end - start, 2)} \n')
@@ -111,21 +116,21 @@ def Start_alg():
 
     elif alg_menu.get() == "Insertion Sort":
         start = time.perf_counter()
-        insertion(data, drawdata, 0)
+        insertion(data, drawdata, speed)
         end = time.perf_counter()
         timetext = str(f'Insertion {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
 
     elif alg_menu.get() == "Merge Sort":
         start = time.perf_counter()
-        merge_sort(data, drawdata, 0)
+        merge_sort(data, drawdata, speed)
         end = time.perf_counter()
         timetext = str(f'Merge {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
 
     elif alg_menu.get() == "Selection Sort":
         start = time.perf_counter()
-        selection(data, drawdata, 0)
+        selection(data, drawdata, speed)
         drawdata(data, ['green' for x in range(len(data))])
         end = time.perf_counter()
         timetext = str(f'Selection {size} en {round(end - start, 2)} \n')
@@ -133,14 +138,14 @@ def Start_alg():
 
     elif alg_menu.get() == "Opti Bubble Sort":
         start = time.perf_counter()
-        opti_bubble(data, drawdata, 0)
+        opti_bubble(data, drawdata, speed)
         end = time.perf_counter()
         timetext = str(f'Opti bubble {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
 
     elif alg_menu.get() == "Random Sort":
         start = time.perf_counter()
-        random_sorts(data, drawdata, 0)
+        random_sorts(data, drawdata, speed)
         end = time.perf_counter()
         timetext = str(f'Random {size} en {round(end - start, 2)} i {len(trys)} intents \n')
         crono.insert(0.0, str(timetext))
@@ -149,7 +154,7 @@ def Start_alg():
         pass
 
 def selected_search():
-    global nEntry, ser_menu, data, size
+    global nEntry, ser_menu, data, size, speed_entry
 
     # check if the value is correct, if it's not, set a defaul of 2
     try:
@@ -157,20 +162,25 @@ def selected_search():
     except:
         n = 2
 
+    try:
+        speed = float(speed_entry.get())
+    except:
+        speed = 0
+
     if int(nEntry.get()) > len(data):
         crono.insert(0.0, 'The data is not in here \n')
 
     else:
         if ser_menu.get() == "Linear Search":
             start = time.perf_counter() # start timer
-            linear(data, n, drawdata, 0)    # call the function
+            linear(data, n, drawdata, speed)    # call the function
             end = time.perf_counter()   # stop timer
             timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
             crono.insert(0.0, str(timetext))    # write the times in the screen
 
         elif ser_menu.get() == "Binary Search":
             start = time.perf_counter()
-            binary(data, n-1, 0, len(data)-1, drawdata, 0.5)
+            binary(data, n-1, 0, len(data)-1, drawdata, speed)
             end = time.perf_counter()
             timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
             crono.insert(0.0, str(timetext))
@@ -215,4 +225,9 @@ order = Button(ui_frame, text='Order!', font=("arial", 18), command=Start_alg, b
 order.grid(row=2, column=2, padx=2, pady=2)
 order = Button(ui_frame, text='Find', font=("arial", 18), command=selected_search, bg='red')
 order.grid(row=2, column=3, padx=2, pady=2)
+
+Label(ui_frame, text="      Speed:", bg='lightblue1').grid(row=3, column=0, padx=5, pady=5, sticky=W)
+speed_entry = Entry(ui_frame, width=15)
+speed_entry.grid(row=3, column=1, padx=2, pady=2, sticky=W)
+
 root.mainloop()
