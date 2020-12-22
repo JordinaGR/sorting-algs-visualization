@@ -20,7 +20,6 @@ from pre import pre30
 from pre import pre40
 from pre import pre50
 
-
 # start a tkinter window
 menu = Tk()
 root = Tk()
@@ -36,10 +35,12 @@ root.minsize(root.winfo_screenwidth(), root.winfo_screenheight())
 root.config(bg="black")
 root.title("Sorting algorithms visualization")
 
+menu.geometry('735x200+20+0')
 
 # vars
 selected_alg = StringVar()
 dades_pre = StringVar()
+datamode_var = StringVar()
 data = []
 trys = random_sort.trys
 pre1 = pre1.pre1
@@ -90,6 +91,30 @@ def generate():
 
         for u in pre_dict.get(which_pre):
             data.append(u)
+
+    elif datamode_comb.get() != 'Normal':
+        if datamode_comb.get() == 'Random':
+            for n in range(1, size + 1):
+                data.append(random.randint(1, size + 1))
+
+        elif datamode_comb.get() =='Inverted':
+            i = size
+            while i:
+                data.append(i)
+                i -=1
+
+        elif datamode_comb.get() == 'Repited':
+            times = int(repited_times.get())
+            num = size // times
+            val = 1
+
+            while times > 0:
+                for i in range(num):
+                    data.append(val)
+                val += 1
+                times -= 1
+            random.shuffle(data)
+
     # if there's no defaul selected, create a random list with the size you selected
     else:
         for n in range(1, size + 1):
@@ -98,8 +123,14 @@ def generate():
 
     drawdata(data, ['black' for x in range(len(data)+1)]) # call the drawdata function and create the squares
 
+def quit_func():
+    quit()
+
 def Start_alg():
     global data, size, crono, speed_entry
+
+    menu.iconify()
+    time.sleep(1)
 
     try:
         speed = float(speed_entry.get())
@@ -111,7 +142,9 @@ def Start_alg():
         bubble_sort(data, drawdata, speed)  # call the sort function
         end = time.perf_counter()   # stop the timer when the function ends
         timetext = str(f'Bubble {size} en {round(end - start, 2)} \n')  # write the timing in the program
-        crono.insert(0.0, str(timetext))    
+        crono.insert(0.0, str(timetext))
+        time.sleep(1)
+        menu.deiconify()  
 
     elif alg_menu.get() == "Quick Sort":
         start = time.perf_counter()
@@ -120,6 +153,8 @@ def Start_alg():
         end = time.perf_counter()
         timetext = str(f'Quick {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
+        time.sleep(1)
+        menu.deiconify() 
 
     elif alg_menu.get() == "Insertion Sort":
         start = time.perf_counter()
@@ -127,6 +162,8 @@ def Start_alg():
         end = time.perf_counter()
         timetext = str(f'Insertion {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
+        time.sleep(1)
+        menu.deiconify() 
 
     elif alg_menu.get() == "Merge Sort":
         start = time.perf_counter()
@@ -134,6 +171,8 @@ def Start_alg():
         end = time.perf_counter()
         timetext = str(f'Merge {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
+        time.sleep(1)
+        menu.deiconify() 
 
     elif alg_menu.get() == "Selection Sort":
         start = time.perf_counter()
@@ -142,6 +181,8 @@ def Start_alg():
         end = time.perf_counter()
         timetext = str(f'Selection {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
+        time.sleep(1)
+        menu.deiconify() 
 
     elif alg_menu.get() == "Opti Bubble Sort":
         start = time.perf_counter()
@@ -149,6 +190,8 @@ def Start_alg():
         end = time.perf_counter()
         timetext = str(f'Opti bubble {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
+        time.sleep(1)
+        menu.deiconify() 
 
     elif alg_menu.get() == "Random Sort":
         start = time.perf_counter()
@@ -156,9 +199,8 @@ def Start_alg():
         end = time.perf_counter()
         timetext = str(f'Random {size} en {round(end - start, 2)} i {len(trys)} intents \n')
         crono.insert(0.0, str(timetext))
-    
-    else:
-        pass
+        time.sleep(1)
+        menu.deiconify() 
 
 def selected_search():
     global nEntry, ser_menu, data, size, speed_entry
@@ -178,12 +220,16 @@ def selected_search():
         crono.insert(0.0, 'The data is not in here \n')
 
     else:
+        menu.iconify()
+        time.sleep(1)
         if ser_menu.get() == "Linear Search":
             start = time.perf_counter() # start timer
             linear(data, n, drawdata, speed)    # call the function
             end = time.perf_counter()   # stop timer
             timetext = str(f'Linear {n}, {size} en {round(end - start, 5)} \n')
             crono.insert(0.0, str(timetext))    # write the times in the screen
+            time.sleep(1)
+            menu.deiconify() 
 
         elif ser_menu.get() == "Binary Search":
             start = time.perf_counter()
@@ -191,6 +237,8 @@ def selected_search():
             end = time.perf_counter()
             timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
             crono.insert(0.0, str(timetext))
+            time.sleep(1)
+            menu.deiconify() 
 
 # frames
 canvas = Canvas(root, width=widthr, height=heightr, bg="white")
@@ -212,7 +260,7 @@ nEntry = Entry(menu, width=10)
 nEntry.grid(row=1, column=2, padx=2, pady=2, sticky=W)
 #nEntry.insert(END, 30) #delete this after testing
 
-Label(menu, text="Number of data ", bg='lightblue1').grid(row=2, column=0, padx=5, pady=5, sticky=W)
+Label(menu, text="Number of data: ", bg='lightblue1').grid(row=2, column=0, padx=5, pady=5, sticky=W)
 sizeEntry = Entry(menu, width=15)
 sizeEntry.grid(row=2, column=1, padx=2, pady=2, sticky=W)
 
@@ -229,10 +277,20 @@ order.grid(row=2, column=2, padx=2, pady=2)
 order = Button(menu, text='Find', font=("arial", 18), command=selected_search, bg='red')
 order.grid(row=2, column=3, padx=2, pady=2)
 
-
 Label(menu, text="      Speed:", bg='lightblue1').grid(row=3, column=0, padx=5, pady=5, sticky=W)
 speed_entry = Entry(menu, width=15)
 speed_entry.grid(row=3, column=1, padx=2, pady=2, sticky=W)
+
+Label(menu, text="Data mode:", bg='lightblue1').grid(row=3, column=2, padx=5, pady=5, sticky=W)
+datamode_comb = Combobox(menu, textvariable=datamode_var, values=['Normal','Random', 'Repited', 'Inverted'])
+datamode_comb.current(0)
+datamode_comb.grid(row=3, column=3, padx=2, pady=2, sticky=W)
+
+repited_times = Entry(menu, width=15)
+repited_times.grid(row=3, column=4, padx=2, pady=2, sticky=W)
+
+quit_but = Button(menu, text='Quit', font=("arial", 18), command=quit_func, bg='yellow')
+quit_but.grid(row=0, column=4, padx=2, pady=2)
 
 menu.mainloop()
 root.mainloop()
