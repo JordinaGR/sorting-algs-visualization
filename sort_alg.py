@@ -13,6 +13,7 @@ from algs.selection_sort import selection
 from algs.binary_search import binary
 from algs.opti_bubble_sort import opti_bubble
 from algs.random_sort import random_sorts
+from algs.shell_sort import shell
 from algs import random_sort
 from pre import pre1
 from pre import pre15
@@ -26,7 +27,7 @@ from pre import pre50
     #radix sort
 
     #comb sort
-    #heap sortt
+    #heap sort
 
 file1 = open("/home/jordina/Desktop/programes python/sorting_alg/passw.txt", "r")
 passw = file1.readline()
@@ -118,7 +119,7 @@ def Start_alg():
         end = time.perf_counter()   # stop the timer when the function ends
         timetext = str(f'Bubble {size} en {round(end - start, 2)} \n')  # write the timing in the program
         crono.insert(0.0, str(timetext))    
-        dbb_alg = "bubble"  # create variables to insert them in the SQL table
+        dbb_alg = "Bubble"  # create variables to insert them in the SQL table
         dbb_size = size
         dbb_sec = round(end - start, 2)
         sqlformula = "INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)"
@@ -129,8 +130,8 @@ def Start_alg():
     elif alg_menu.get() == "Quick Sort":
         start = time.perf_counter()
         quick_sort(data, 0, len(data)-1, drawdata, 0)
-        drawdata(data, ['green' for x in range(len(data))])
         end = time.perf_counter()
+        drawdata(data, ['green' for x in range(len(data))])
         timetext = str(f'Quick {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
         dbq_alg = "quick"
@@ -173,7 +174,8 @@ def Start_alg():
         start = time.perf_counter()
         selection(data, drawdata, 0)
         end = time.perf_counter()
-        timetext = str(f'selection {size} en {round(end - start, 2)} \n')
+        drawdata(data, ['green' for x in range(len(data))])
+        timetext = str(f'Selection {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
         dbm_alg = "selection"
         dbm_size = size
@@ -211,6 +213,21 @@ def Start_alg():
         dades = (dbr_alg, dbr_size, dbr_sec, dbr_trys)
         mycursor.execute(sqlformula, dades)
         mydb.commit()
+
+    elif alg_menu.get() == "Shell Sort":
+        start = time.perf_counter()
+        shell(data, drawdata, 0)
+        end = time.perf_counter()
+        drawdata(data, ['green' for x in range(len(data))])
+        timetext = str(f'Shell {size} en {round(end - start, 2)} \n')
+        crono.insert(0.0, str(timetext))
+        dbs_alg = "Shell"
+        dbs_size = size
+        dbs_sec = round(end - start, 2)
+        sqlformula = "INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)"
+        dades = (dbs_alg, dbs_size, dbs_sec)
+        mycursor.execute(sqlformula, dades)
+        mydb.commit()
     
     else:
         pass
@@ -244,7 +261,7 @@ def selected_search():
     
     elif ser_menu.get() == "Binary Search":
         start = time.perf_counter()
-        binary(data, n-1, 0, len(data)-1, drawdata, 0.2)
+        binary(data, n-1, 0, len(data)-1, drawdata, 0)
         end = time.perf_counter()
         timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
         crono.insert(0.0, str(timetext))
@@ -266,7 +283,7 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort','Opti Bubble Sort','Selection Sort' ,'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Random Sort'])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort','Opti Bubble Sort','Selection Sort' ,'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Random Sort', 'Shell Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
@@ -278,7 +295,7 @@ ser_menu.current([0])
 nEntry = Entry(ui_frame, width=10)
 nEntry.grid(row=1, column=2, padx=2, pady=2, sticky=W)
 
-Label(ui_frame, text="Nombre de barres ", bg='lightblue1').grid(row=2, column=0, padx=5, pady=5, sticky=W)
+Label(ui_frame, text="Number of data ", bg='lightblue1').grid(row=2, column=0, padx=5, pady=5, sticky=W)
 sizeEntry = Entry(ui_frame, width=15)
 sizeEntry.grid(row=2, column=1, padx=2, pady=2, sticky=W)
 

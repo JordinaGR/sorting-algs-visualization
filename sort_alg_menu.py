@@ -12,6 +12,7 @@ from algs.selection_sort import selection
 from algs.binary_search import binary
 from algs.opti_bubble_sort import opti_bubble
 from algs.random_sort import random_sorts
+from algs.shell_sort import shell
 from algs import random_sort
 from pre import pre1
 from pre import pre15
@@ -35,7 +36,7 @@ root.minsize(root.winfo_screenwidth(), root.winfo_screenheight())
 root.config(bg="black")
 root.title("Sorting algorithms visualization")
 
-menu.geometry('735x200+20+0')
+#menu.geometry('735x200+20+0')
 
 # vars
 selected_alg = StringVar()
@@ -49,6 +50,7 @@ pre20 = pre20.pre20
 pre30 = pre30.pre30
 pre40 = pre40.pre40
 pre50 = pre50.pre50
+savedArr = []
 
 # draw the rectangles
 def drawdata(data, colorarray):
@@ -149,8 +151,8 @@ def Start_alg():
     elif alg_menu.get() == "Quick Sort":
         start = time.perf_counter()
         quick_sort(data, 0, len(data)-1, drawdata, speed)
-        drawdata(data, ['green' for x in range(len(data))])
         end = time.perf_counter()
+        drawdata(data, ['green' for x in range(len(data))])
         timetext = str(f'Quick {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
         time.sleep(1)
@@ -177,8 +179,8 @@ def Start_alg():
     elif alg_menu.get() == "Selection Sort":
         start = time.perf_counter()
         selection(data, drawdata, speed)
-        drawdata(data, ['green' for x in range(len(data))])
         end = time.perf_counter()
+        drawdata(data, ['green' for x in range(len(data))])
         timetext = str(f'Selection {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
         time.sleep(1)
@@ -201,6 +203,16 @@ def Start_alg():
         crono.insert(0.0, str(timetext))
         time.sleep(1)
         menu.deiconify() 
+
+    elif alg_menu.get() == "Shell Sort":
+        start = time.perf_counter()
+        shell(data, drawdata, speed)
+        end = time.perf_counter()
+        drawdata(data, ['green' for x in range(len(data))])
+        timetext = str(f'Shell {size} en {round(end - start, 2)} \n')
+        crono.insert(0.0, str(timetext))
+        time.sleep(1)
+        menu.deiconify()
 
 def selected_search():
     global nEntry, ser_menu, data, size, speed_entry
@@ -240,13 +252,29 @@ def selected_search():
             time.sleep(1)
             menu.deiconify() 
 
+def save_func():
+    global savedArr
+
+    if len(data) == 0:
+        textt = str('Gen data first\n')
+        crono.insert(0.0, str(textt))
+    else:
+        savedArr = data
+        textt = str('Successfuly saved\n')
+        crono.insert(0.0, str(textt))
+
+def use_func():
+    global savedArr
+
+    drawdata(savedArr, ['black' for x in range(len(savedArr)+1)])
+
 # frames
 canvas = Canvas(root, width=widthr, height=heightr, bg="white")
 canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(menu, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(menu, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Random Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
+alg_menu = Combobox(menu, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Random Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Shell Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(menu, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
@@ -291,6 +319,12 @@ repited_times.grid(row=3, column=4, padx=2, pady=2, sticky=W)
 
 quit_but = Button(menu, text='Quit', font=("arial", 18), command=quit_func, bg='yellow')
 quit_but.grid(row=0, column=4, padx=2, pady=2)
+
+save_but = Button(menu, text='Save', font=("arial", 18), command=save_func, bg='green')
+save_but.grid(row=0, column=5, padx=2, pady=2)
+
+use_but = Button(menu, text='Use', font=("arial", 18), command=use_func, bg='green')
+use_but.grid(row=1, column=5, padx=2, pady=2)
 
 menu.mainloop()
 root.mainloop()

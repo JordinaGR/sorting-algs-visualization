@@ -37,7 +37,8 @@ The file sort_alg_menu.py is the same but without a database, with the menu in a
 ###### To do list:
 - ~~Create a separate menu window in another file~~
 - ~~Be able to change speed and create the Entry on sort_alg_noDB~~
-- Add keyboard shortcuts for the menu
-- More options to generate data
+- ~~More options to generate data~~
+- ~~Button to save the data and use it later~~
+- Rearrange the menu controls
 
 Thanks for checking it out.

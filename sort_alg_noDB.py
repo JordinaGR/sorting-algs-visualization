@@ -12,6 +12,7 @@ from algs.selection_sort import selection
 from algs.binary_search import binary
 from algs.opti_bubble_sort import opti_bubble
 from algs.random_sort import random_sorts
+from algs.shell_sort import shell
 from algs import random_sort
 from pre import pre1
 from pre import pre15
@@ -109,8 +110,8 @@ def Start_alg():
     elif alg_menu.get() == "Quick Sort":
         start = time.perf_counter()
         quick_sort(data, 0, len(data)-1, drawdata, speed)
-        drawdata(data, ['green' for x in range(len(data))])
         end = time.perf_counter()
+        drawdata(data, ['green' for x in range(len(data))])
         timetext = str(f'Quick {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
 
@@ -131,8 +132,8 @@ def Start_alg():
     elif alg_menu.get() == "Selection Sort":
         start = time.perf_counter()
         selection(data, drawdata, speed)
-        drawdata(data, ['green' for x in range(len(data))])
         end = time.perf_counter()
+        drawdata(data, ['green' for x in range(len(data))])
         timetext = str(f'Selection {size} en {round(end - start, 2)} \n')
         crono.insert(0.0, str(timetext))
 
@@ -149,7 +150,15 @@ def Start_alg():
         end = time.perf_counter()
         timetext = str(f'Random {size} en {round(end - start, 2)} i {len(trys)} intents \n')
         crono.insert(0.0, str(timetext))
-    
+
+    elif alg_menu.get() == "Shell Sort":
+        start = time.perf_counter()
+        shell(data, drawdata, speed)
+        end = time.perf_counter()
+        drawdata(data, ['green' for x in range(len(data))])
+        timetext = str(f'Shell {size} en {round(end - start, 2)} \n')
+        crono.insert(0.0, str(timetext))
+
     else:
         pass
 
@@ -194,7 +203,7 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Random Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort'])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Random Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Shell Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
@@ -208,7 +217,7 @@ nEntry = Entry(ui_frame, width=10)
 nEntry.grid(row=1, column=2, padx=2, pady=2, sticky=W)
 #nEntry.insert(END, 30) #delete this after testing
 
-Label(ui_frame, text="Nombre de barres ", bg='lightblue1').grid(row=2, column=0, padx=5, pady=5, sticky=W)
+Label(ui_frame, text="Number of data ", bg='lightblue1').grid(row=2, column=0, padx=5, pady=5, sticky=W)
 sizeEntry = Entry(ui_frame, width=15)
 sizeEntry.grid(row=2, column=1, padx=2, pady=2, sticky=W)
 
