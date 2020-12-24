@@ -17,7 +17,7 @@ The main file is the sort_alg.py. The algs are in the algs folder.
 
 The pre folder contains files with programs that creates arrays. They get stored in the 'pre_something' variable (the pre15 contains 15 numbers, the pre30 30 numbers) so you can compare the timing with the same array but different algorithms.
 
-The file sort_algs_noDB.py is the same as the sort_algs.py but without a database, so you can run it on almost all the machines. Ans is not updated. The sort_alg_menu.py is up to date and where I do all the changes.
+The file sort_algs_noDB.py is the same as the sort_algs.py but without a database, so you can run it on almost all the machines. And is not updated. The sort_alg_menu.py is up to date and where I do all the changes.
 
 The file sort_alg_menu.py is the same but without a database, with the menu in a different window and updated.
 
@@ -29,6 +29,7 @@ The file sort_alg_menu.py is the same but without a database, with the menu in a
 - Quick sort
 - Merge sort
 - Random sort
+- Shell sort
 
 #### The searching algorithms currently implemented are:
 - Linear search

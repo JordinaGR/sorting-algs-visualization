@@ -14,12 +14,12 @@ from algs.opti_bubble_sort import opti_bubble
 from algs.random_sort import random_sorts
 from algs.shell_sort import shell
 from algs import random_sort
+from pre import pre
 from pre import pre1
-from pre import pre15
-from pre import pre20
-from pre import pre30
-from pre import pre40
-from pre import pre50
+from pre import pre2
+from pre import pre3
+from pre import pre4
+from pre import pre5
 
 # start a tkinter window
 menu = Tk()
@@ -44,12 +44,12 @@ dades_pre = StringVar()
 datamode_var = StringVar()
 data = []
 trys = random_sort.trys
+pre = pre.pre
 pre1 = pre1.pre1
-pre15 = pre15.pre15
-pre20 = pre20.pre20
-pre30 = pre30.pre30
-pre40 = pre40.pre40
-pre50 = pre50.pre50
+pre2 = pre2.pre2
+pre3 = pre3.pre3
+pre4 = pre4.pre4
+pre5 = pre5.pre5
 savedArr = []
 
 # draw the rectangles
@@ -76,7 +76,7 @@ def drawdata(data, colorarray):
 
 # generate an array
 def generate():
-    global data, pre1, pre15, pre20, pre30, pre40, pre50, size
+    global data, pre, pre1, pre2, pre3, pre4, pre5, size
 
     try:    # if the size is not valid, set a default
         size = int(sizeEntry.get())
@@ -86,7 +86,7 @@ def generate():
     data = []
 
     # check if there's a default set selectet, if it is, append that data to the list
-    pre_dict = {'Pre1':pre1, 'Pre15':pre15, 'Pre20':pre20, 'Pre30':pre30, 'Pre40':pre40, 'Pre50':pre50}
+    pre_dict = {'Pre':pre, 'Pre1':pre1, 'Pre2':pre2, 'Pre3':pre3, 'Pre4':pre4, 'Pre5':pre5}
 
     if pre_det.get() != 'No':
         which_pre = pre_det.get()
@@ -292,7 +292,7 @@ Label(menu, text="Number of data: ", bg='lightblue1').grid(row=2, column=0, padx
 sizeEntry = Entry(menu, width=15)
 sizeEntry.grid(row=2, column=1, padx=2, pady=2, sticky=W)
 
-pre_det = Combobox(menu, textvariable=dades_pre, values=['No', 'Pre1', 'Pre15', 'Pre20', 'Pre30', 'Pre40', 'Pre50'])
+pre_det = Combobox(menu, textvariable=dades_pre, values=['No', 'Pre', 'Pre1', 'Pre2', 'Pre3', 'Pre4', 'Pre5'])
 pre_det.grid(row=1, column=3, padx=2, pady=2)
 pre_det.current([0])
 #pre_det.current(1) # delete this after testing
