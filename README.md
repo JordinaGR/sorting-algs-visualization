@@ -13,9 +13,7 @@ Sorting and searching algorithms visualization with python 3.8 and tkinter. The 
 
 There is a timer and the data gets stored in MySQL database. So, I can compare between algorithms doing some statistics. There are two tables, the sorting and the serching algs.
 
-The main file is the sort_alg.py. The algs are in the algs folder. 
-
-The pre folder contains files with programs that creates arrays. They get stored in the 'pre_something' variable (the pre15 contains 15 numbers, the pre30 30 numbers) so you can compare the timing with the same array but different algorithms.
+The pre folder contains files with programs to create arrays. They get stored in the 'pre_something' variable so you can compare the timing with the same array but different algorithms.
 
 The file sort_algs_noDB.py is the same as the sort_algs.py but without a database, so you can run it on almost all the machines. And is not updated. The sort_alg_menu.py is up to date and where I do all the changes.
 
