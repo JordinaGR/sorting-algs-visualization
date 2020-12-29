@@ -14,6 +14,7 @@ from algs.binary_search import binary
 from algs.opti_bubble_sort import opti_bubble
 from algs.random_sort import random_sorts
 from algs.shell_sort import shell
+from algs.exponential_search import exponential
 from algs import random_sort
 from pre import pre
 from pre import pre1
@@ -273,6 +274,20 @@ def selected_search():
         mycursor.execute(sqlformula, dades)
         mydb.commit()
 
+    elif ser_menu.get() == "Exponential Search":
+        start = time.perf_counter()
+        exponential(data, n-1, drawdata, 0)
+        end = time.perf_counter()
+        timetext = str(f'Exponential {n}, {size} en {round(end - start, 5)} \n')
+        crono.insert(0.0, str(timetext))
+        sl_alg = "exponential"
+        sl_size = size
+        sl_sec = round(end - start, 2)
+        sl_sdata = n
+        sqlformula = "INSERT INTO searchdata (alg, size, sec, sdata) VALUES (%s, %s, %s, %s)"
+        dades = (sl_alg, sl_size, sl_sec, sl_sdata)
+        mycursor.execute(sqlformula, dades)
+        mydb.commit()
 # frames
 ui_frame = Frame(root, width=widthr, height=heightr/4, bg="lightblue1")
 ui_frame.grid(row=0, column=0, padx=0, pady=0)
@@ -288,7 +303,7 @@ alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
 
 Label(ui_frame, text="Search:", bg="lightblue1").grid(row=1, column=0, padx=5, pady=5)
-ser_menu = Combobox(ui_frame, textvariable=selected_search, values=['No' ,'Linear Search', 'Binary Search'])
+ser_menu = Combobox(ui_frame, textvariable=selected_search, values=['No' ,'Linear Search', 'Binary Search', 'Exponential Search'])
 ser_menu.grid(row=1, column=1, padx=2, pady=2)
 ser_menu.current([0])
 nEntry = Entry(ui_frame, width=10)

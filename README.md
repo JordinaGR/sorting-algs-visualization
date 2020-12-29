@@ -32,6 +32,7 @@ The file sort_alg_menu.py is the same but without a database, with the menu in a
 #### The searching algorithms currently implemented are:
 - Linear search
 - Binary search
+- Exponential search
 
 ###### To do list:
 - ~~Create a separate menu window in another file~~
