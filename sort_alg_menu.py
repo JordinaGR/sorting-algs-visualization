@@ -13,6 +13,7 @@ from algs.binary_search import binary
 from algs.opti_bubble_sort import opti_bubble
 from algs.random_sort import random_sorts
 from algs.shell_sort import shell
+from algs.exponential_search import exponential
 from algs import random_sort
 from pre import pre
 from pre import pre1
@@ -250,7 +251,16 @@ def selected_search():
             timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
             crono.insert(0.0, str(timetext))
             time.sleep(1)
-            menu.deiconify() 
+            menu.deiconify()
+
+        elif ser_menu.get() == "Exponential Search":
+            start = time.perf_counter()
+            exponential(data, n-1, drawdata, speed)
+            end = time.perf_counter()
+            timetext = str(f'Exponential {n}, {size} en {round(end - start, 5)} \n')
+            crono.insert(0.0, str(timetext))
+            time.sleep(1)
+            menu.deiconify()
 
 def save_func():
     global savedArr
@@ -280,7 +290,7 @@ alg_menu.current([0])
 Button(menu, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
 
 Label(menu, text="Search:", bg="lightblue1").grid(row=1, column=0, padx=5, pady=5)
-ser_menu = Combobox(menu, textvariable=selected_search, values=['No' ,'Linear Search', 'Binary Search'])
+ser_menu = Combobox(menu, textvariable=selected_search, values=['No' ,'Linear Search', 'Binary Search', 'Exponential Search'])
 ser_menu.grid(row=1, column=1, padx=2, pady=2)
 ser_menu.current([0])
 #ser_menu.current(2) # delete this after testing
