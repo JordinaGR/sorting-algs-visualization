@@ -15,6 +15,7 @@ from algs.random_sort import random_sorts
 from algs.shell_sort import shell
 from algs.exponential_search import exponential
 from algs import random_sort
+from algs.counting_sort import counting
 from pre import pre
 from pre import pre1
 from pre import pre2
@@ -43,6 +44,7 @@ root.title("Sorting algorithms visualization")
 selected_alg = StringVar()
 dades_pre = StringVar()
 datamode_var = StringVar()
+checkvar = IntVar()
 data = []
 trys = random_sort.trys
 pre = pre.pre
@@ -132,8 +134,9 @@ def quit_func():
 def Start_alg():
     global data, size, crono, speed_entry
 
-    menu.iconify()
-    time.sleep(1)
+    if checkvar.get() == 1:
+        menu.iconify()
+        time.sleep(1)
 
     try:
         speed = float(speed_entry.get())
@@ -215,6 +218,15 @@ def Start_alg():
         time.sleep(1)
         menu.deiconify()
 
+    elif alg_menu.get() == "Counting Sort":
+        start = time.perf_counter()
+        counting(data, drawdata, speed)
+        end = time.perf_counter()
+        timetext = str(f'Counting {size} en {round(end - start, 2)} \n')
+        crono.insert(0.0, str(timetext))
+        time.sleep(1)
+        menu.deiconify()
+
 def selected_search():
     global nEntry, ser_menu, data, size, speed_entry
 
@@ -233,8 +245,11 @@ def selected_search():
         crono.insert(0.0, 'The data is not in here \n')
 
     else:
-        menu.iconify()
-        time.sleep(1)
+
+        if checkvar.get() == 1:
+            menu.iconify()
+            time.sleep(1)
+
         if ser_menu.get() == "Linear Search":
             start = time.perf_counter() # start timer
             linear(data, n, drawdata, speed)    # call the function
@@ -278,13 +293,18 @@ def use_func():
 
     drawdata(savedArr, ['black' for x in range(len(savedArr)+1)])
 
+def dbinfo():
+    from other.database_button import database_func
+    database_func()
+
+
 # frames
 canvas = Canvas(root, width=widthr, height=heightr, bg="white")
 canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(menu, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(menu, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Random Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Shell Sort'])
+alg_menu = Combobox(menu, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Random Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Shell Sort', 'Counting Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(menu, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
@@ -335,6 +355,14 @@ save_but.grid(row=0, column=5, padx=2, pady=2)
 
 use_but = Button(menu, text='Use', font=("arial", 18), command=use_func, bg='green')
 use_but.grid(row=1, column=5, padx=2, pady=2)
+
+database_info_but = Button(menu, text='Database', font=('arial', 18), command=dbinfo, bg='royalblue1')
+database_info_but.grid(row=2, column=5, padx=2, pady=2)
+
+checkbox_wind = Checkbutton(menu, text='Minimize?', variable=checkvar, onvalue=1, offvalue=0, heigh=5, width=20, bg='lightblue1')
+checkbox_wind.config(activebackground='lightblue2')
+
+checkbox_wind.grid(row=2, column=4)
 
 menu.mainloop()
 root.mainloop()

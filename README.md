@@ -28,6 +28,7 @@ The file sort_alg_menu.py is the same but without a database, with the menu in a
 - Merge sort
 - Random sort
 - Shell sort
+- Counting sort
 
 #### The searching algorithms currently implemented are:
 - Linear search
@@ -40,5 +41,8 @@ The file sort_alg_menu.py is the same but without a database, with the menu in a
 - ~~More options to generate data~~
 - ~~Button to save the data and use it later~~
 - Rearrange the menu controls
+- ~~Shell sort~~
+- Button to show database information in a different window
+- Radix sort
 
 Thanks for checking it out.

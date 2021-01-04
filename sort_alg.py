@@ -15,6 +15,7 @@ from algs.opti_bubble_sort import opti_bubble
 from algs.random_sort import random_sorts
 from algs.shell_sort import shell
 from algs.exponential_search import exponential
+from algs.counting_sort import counting
 from algs import random_sort
 from pre import pre
 from pre import pre1
@@ -23,12 +24,13 @@ from pre import pre3
 from pre import pre4
 from pre import pre5
 
-#algs
-    #shell sort
-    #radix sort
-
-    #comb sort
-    #heap sort
+# algs
+    # radix sort
+    # comb sort
+    # heap sort
+    # counting sort
+    # bogoo sort
+    # cocktail 
 
 file1 = open("/home/jordina/Desktop/programes python/sorting_alg/passw.txt", "r")
 passw = file1.readline()
@@ -229,6 +231,19 @@ def Start_alg():
         mycursor.execute(sqlformula, dades)
         mydb.commit()
     
+    elif alg_menu.get() == "Counting Sort":
+        start = time.perf_counter()
+        counting(data, drawdata, 0)
+        end = time.perf_counter()
+        timetext = str(f'Counting {size} en {round(end - start, 4)} \n')
+        crono.insert(0.0, str(timetext))
+        dbs_alg = "Counting"
+        dbs_size = size
+        dbs_sec = round(end - start, 4)
+        sqlformula = "INSERT INTO sortdata (alg, size, sec) VALUES (%s, %s, %s)"
+        dades = (dbs_alg, dbs_size, dbs_sec)
+        mycursor.execute(sqlformula, dades)
+
     mycursor.execute('delete from sortdata where size=0')
     mydb.commit()
 
@@ -297,7 +312,7 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(ui_frame, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort','Opti Bubble Sort','Selection Sort' ,'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Random Sort', 'Shell Sort'])
+alg_menu = Combobox(ui_frame, textvariable=selected_alg, values=['No' , 'Bubble Sort','Opti Bubble Sort','Selection Sort' ,'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Random Sort', 'Shell Sort', 'Counting Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(ui_frame, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
