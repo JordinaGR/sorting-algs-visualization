@@ -16,6 +16,7 @@ from algs.shell_sort import shell
 from algs.exponential_search import exponential
 from algs import random_sort
 from algs.counting_sort import counting
+from algs.radix_sort import radixSort
 from pre import pre
 from pre import pre1
 from pre import pre2
@@ -222,10 +223,21 @@ def Start_alg():
         start = time.perf_counter()
         counting(data, drawdata, speed)
         end = time.perf_counter()
-        timetext = str(f'Counting {size} en {round(end - start, 2)} \n')
+        timetext = str(f'Counting {size} en {round(end - start, 4)} \n')
         crono.insert(0.0, str(timetext))
         time.sleep(1)
         menu.deiconify()
+
+    elif alg_menu.get() == "Radix Sort":
+        start = time.perf_counter()
+        radixSort(data, drawdata, speed)
+        end = time.perf_counter()
+        drawdata(data, ['green' for x in range(len(data))])
+        timetext = str(f'Radix {size} en {round(end - start, 4)} \n')
+        crono.insert(0.0, str(timetext))
+        time.sleep(1)
+        menu.deiconify()
+
 
 def selected_search():
     global nEntry, ser_menu, data, size, speed_entry
@@ -304,7 +316,7 @@ canvas.grid(row=2, column=0, padx=10, pady=2)
 
 # ui
 Label(menu, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(menu, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Random Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Shell Sort', 'Counting Sort'])
+alg_menu = Combobox(menu, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Random Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Shell Sort', 'Counting Sort', 'Radix Sort'])
 alg_menu.grid(row=0, column=1, padx=2, pady=2)
 alg_menu.current([0])
 Button(menu, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
