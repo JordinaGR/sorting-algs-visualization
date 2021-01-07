@@ -19,6 +19,9 @@ The file sort_algs_noDB.py is the same as the sort_algs.py but without a databas
 
 The file sort_alg_menu.py is the same but without a database, with the menu in a different window and updated.
 
+There's a new database in .csv files, these files are useded by the sort_alg_menu.py. When you click the button database in the menue, a new window opens with the .csv information. That window is made in other/database_button.py
+
+
 #### The sorting algorithms currently implemented are:
 - Bubble sort
 - Optimized bubble sort
@@ -29,11 +32,14 @@ The file sort_alg_menu.py is the same but without a database, with the menu in a
 - Random sort
 - Shell sort
 - Counting sort
+- Radix sort
+- Cocktail sort
 
 #### The searching algorithms currently implemented are:
 - Linear search
 - Binary search
 - Exponential search
+
 
 ###### To do list:
 - ~~Create a separate menu window in another file~~
@@ -43,6 +49,7 @@ The file sort_alg_menu.py is the same but without a database, with the menu in a
 - Rearrange the menu controls
 - ~~Shell sort~~
 - Button to show database information in a different window
-- Radix sort
+- ~~Radix sort~~
+- Bind scroll bar on database table
 
 Thanks for checking it out.

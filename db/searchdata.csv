@@ -1,0 +1,7 @@
+alg,size,sec,sdata,speed
+binary,300,0.05,143,0
+linear,50,0.0571,45,0
+linear,50,0.0742,12,0
+binary,200,0.00894,150,0
+binary,200,0.03604,24,0
+linear,200,0.06639,24,0

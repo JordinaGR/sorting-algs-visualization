@@ -19,24 +19,17 @@ def countingSort(data, exp1, drawdata, speed):
         index = (data[i] / exp1) 
         output[count[int(index % 10)] - 1] = data[i] 
         count[int(index % 10)] -= 1
-        drawdata(data, ['blue' if x == index else ['black'] for x in range(len(data))])
-        time.sleep(speed)
         i -= 1
 
     for i in range(0, len(data)): 
         data[i] = output[i]
 
     drawdata(data, ['black' for x in range(len(data))])
-    time.sleep(speed)
+    time.sleep(speed + 0.3)
 
 def radixSort(data, drawdata, speed): 
 
-    max1 = 0
-    for i in range(len(data)):
-        drawdata(data, ['red' if x == i else ['black'] for x in range(len(data))])
-        time.sleep(speed)
-        if data[i] > max1:
-            max1 = data[i]
+    max1 = max(data)
 
     exp = 1
     numss = len(str(max(data)))

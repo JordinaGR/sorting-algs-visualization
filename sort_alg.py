@@ -25,12 +25,10 @@ from pre import pre4
 from pre import pre5
 
 # algs
-    # radix sort
+
     # comb sort
     # heap sort
-    # counting sort
-    # bogoo sort
-    # cocktail 
+
 
 file1 = open("/home/jordina/Desktop/programes python/sorting_alg/passw.txt", "r")
 passw = file1.readline()
