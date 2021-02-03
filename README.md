@@ -8,6 +8,8 @@ Vids showing how it works (DD/MM/YYYY):
 
 3. 16/12/2020 version #3: https://youtu.be/uF0zBXybNJ0
 
+4. 03/02/2021 version #4: https://youtu.be/Nc4NOI1vlrQ
+
 Sorting and searching algorithms visualization with python 3.8 and tkinter. The purpose of this is the algorithm implementation.
 
 There is a timer and the data gets stored in MySQL database. So, I can compare between algorithms doing some statistics. There are two tables, the sorting and the serching algs.

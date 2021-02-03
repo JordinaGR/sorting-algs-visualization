@@ -1,8 +1,6 @@
-import os
+import os, time, csv, random
 from tkinter import *
 from tkinter.ttk import Combobox
-import time
-import random
 from algs.bubble_sort import bubble_sort
 from algs.quick_sort import quick_sort
 from algs.insertion_sort import insertion
@@ -24,7 +22,6 @@ from pre import pre2
 from pre import pre3
 from pre import pre4
 from pre import pre5
-import csv
 import pandas as pd
 
 # start a tkinter window
