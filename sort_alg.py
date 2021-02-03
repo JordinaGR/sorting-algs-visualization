@@ -24,12 +24,7 @@ from pre import pre3
 from pre import pre4
 from pre import pre5
 
-# algs
-
-    # comb sort
-    # heap sort
-
-
+# file in .gitignore with the password
 file1 = open("/home/jordina/Desktop/programes python/sorting_alg/passw.txt", "r")
 passw = file1.readline()
 

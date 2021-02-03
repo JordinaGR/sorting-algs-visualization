@@ -32,6 +32,7 @@ menu = Tk()
 root = Tk()
 widthr = root.winfo_screenwidth()
 heightr = root.winfo_screenheight()
+
 # set minsize
 menu.minsize(400, 200)
 menu.config(bg="lightblue1")
@@ -42,7 +43,6 @@ root.minsize(root.winfo_screenwidth(), root.winfo_screenheight())
 root.config(bg="black")
 root.title("Sorting algorithms visualization")
 
-#menu.geometry('735x200+20+0')
 
 # vars
 selected_alg = StringVar()
@@ -137,7 +137,7 @@ def quit_func():
 
 
 def database(algtype, alg, size, sec, sdata, speed):
-
+    # open the file and add a row in the corresponding database
     if algtype == 'sort':
         dfso = '/home/jordina/Desktop/programes python/sorting_alg/db/sortdata.csv'
         with open(dfso, 'a') as df:
@@ -163,10 +163,10 @@ def Start_alg():
     except:
         speed = 0
 
-    if alg_menu.get() == "Bubble Sort": # if buble sort selected:
-        start = time.perf_counter() # start a timer
+    if alg_menu.get() == "Bubble Sort":     # if buble sort selected:
+        start = time.perf_counter()         # start a timer
         bubble_sort(data, drawdata, speed)  # call the sort function
-        end = time.perf_counter()   # stop the timer when the function ends
+        end = time.perf_counter()           # stop the timer when the function ends
         timetext = str(f'Bubble {size} en {round(end - start, 5)} \n')  # write the timing in the program
         crono.insert(0.0, str(timetext))
         time.sleep(1)
@@ -302,9 +302,9 @@ def selected_search():
             time.sleep(1)
 
         if ser_menu.get() == "Linear Search":
-            start = time.perf_counter() # start timer
+            start = time.perf_counter()         # start timer
             linear(data, n, drawdata, speed)    # call the function
-            end = time.perf_counter()   # stop timer
+            end = time.perf_counter()           # stop timer
             timetext = str(f'Linear {n}, {size} en {round(end - start, 4)} \n')
             crono.insert(0.0, str(timetext))    # write the times in the screen
             time.sleep(1)
@@ -331,7 +331,7 @@ def selected_search():
             menu.deiconify()
             database('search', 'exponential', size, round(end - start, 5), n, speed)
 
-def save_func():
+def save_func():        # a function to save the array in a button and use it on the use_func
     global savedArr
 
     if len(data) == 0:
@@ -342,12 +342,12 @@ def save_func():
         textt = str('Successfuly saved\n')
         crono.insert(0.0, str(textt))
 
-def use_func():
+def use_func():         # save the data that the save_func has saved
     global savedArr
 
     drawdata(savedArr, ['black' for x in range(len(savedArr)+1)])
 
-def dbinfo():
+def dbinfo():   # open the new window with the database information
     from other.database_button import database_func
     database_func()
 
