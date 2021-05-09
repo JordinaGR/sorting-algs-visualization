@@ -25,8 +25,7 @@ def grid(filee):        # create the grid where the data is going to be showed
     col = len(data_grid[0])
     return row, col, data_grid
 
-def database_func():    # main function
-    global count
+def database_func(count):    # main function
 
     # open the .csv files
     file1 = '/home/jordina/Desktop/programes python/sorting_alg/db/sortdata.csv'
@@ -37,7 +36,6 @@ def database_func():    # main function
     root.minsize(600, 400)
     root.config(bg="white")
     root.title("Database information")
-    count = 0
     
     # create frames, the scrollbar and two tabs
     main_frame = Frame(root)
@@ -99,4 +97,4 @@ def database_func():    # main function
 
     root.mainloop()
 
-database_func()
+database_func(0)

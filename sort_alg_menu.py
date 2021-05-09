@@ -148,6 +148,14 @@ def database(algtype, alg, size, sec, sdata, speed):
             w = csv.writer(df)
             w.writerow([alg, size, sec, sdata, speed])
 
+def sorting_algs_func(alg_name, end, start, size, speed):
+    timetext = str(f'{alg_name} {size} en {round(end - start, 5)} \n')
+    crono.insert(0.0, str(timetext))
+    time.sleep(1)
+    menu.deiconify() 
+    database('sort', alg_name, size, round(end - start, 5), 'sdata', speed)
+
+
 def Start_alg():
     global data, size, crono, speed_entry
 
@@ -164,116 +172,72 @@ def Start_alg():
         start = time.perf_counter()         # start a timer
         bubble_sort(data, drawdata, speed)  # call the sort function
         end = time.perf_counter()           # stop the timer when the function ends
-        timetext = str(f'Bubble {size} en {round(end - start, 5)} \n')  # write the timing in the program
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify()
-        database('sort', 'bubble', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('bubble', end, start, size, speed)
 
     elif alg_menu.get() == "Quick Sort":
         start = time.perf_counter()
         quick_sort(data, 0, len(data)-1, drawdata, speed)
         end = time.perf_counter()
         drawdata(data, ['green' for x in range(len(data))])
-        timetext = str(f'Quick {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify() 
-        database('sort', 'quick', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('quick', end, start, size, speed)
 
     elif alg_menu.get() == "Insertion Sort":
         start = time.perf_counter()
         insertion(data, drawdata, speed)
         end = time.perf_counter()
-        timetext = str(f'Insertion {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify() 
-        database('sort', 'insertion', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('insertion', end, start, size, speed)
 
     elif alg_menu.get() == "Merge Sort":
         start = time.perf_counter()
         merge_sort(data, drawdata, speed)
         end = time.perf_counter()
-        timetext = str(f'Merge {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify() 
-        database('sort', 'merge', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('merge', end, start, size, speed)
 
     elif alg_menu.get() == "Selection Sort":
         start = time.perf_counter()
         selection(data, drawdata, speed)
         end = time.perf_counter()
         drawdata(data, ['green' for x in range(len(data))])
-        timetext = str(f'Selection {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify() 
-        database('sort', 'selection', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('selection', end, start, size, speed)
 
     elif alg_menu.get() == "Opti Bubble Sort":
         start = time.perf_counter()
         opti_bubble(data, drawdata, speed)
         end = time.perf_counter()
-        timetext = str(f'Opti bubble {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify() 
-        database('sort', 'optibubble', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('optibubble', end, start, size, speed)
 
     elif alg_menu.get() == "Random Sort":
         start = time.perf_counter()
         random_sorts(data, drawdata, speed)
         end = time.perf_counter()
-        timetext = str(f'Random {size} en {round(end - start, 5)} i {len(trys)} intents \n')
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify()
-        database('sort', 'bogo', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('bogo', end, start, size, speed)
 
     elif alg_menu.get() == "Shell Sort":
         start = time.perf_counter()
         shell(data, drawdata, speed)
         end = time.perf_counter()
         drawdata(data, ['green' for x in range(len(data))])
-        timetext = str(f'Shell {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify()
-        database('sort', 'shell', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('bogo', end, start, size, speed)
 
     elif alg_menu.get() == "Counting Sort":
         start = time.perf_counter()
         counting(data, drawdata, speed)
         end = time.perf_counter()
-        timetext = str(f'Counting {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify()
-        database('sort', 'counting', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('counting', end, start, size, speed)
 
     elif alg_menu.get() == "Radix Sort":
         start = time.perf_counter()
         radixSort(data, drawdata, speed)
         end = time.perf_counter()
         drawdata(data, ['green' for x in range(len(data))])
-        timetext = str(f'Radix {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify()
-        database('sort', 'radix', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('radix', end, start, size, speed)
 
     elif alg_menu.get() == "Cocktail Sort":
         start = time.perf_counter()
         cocktail(data, drawdata, speed)
         end = time.perf_counter()
         drawdata(data, ['green' for x in range(len(data))])
-        timetext = str(f'Cocktail {size} en {round(end - start, 5)} \n')
-        crono.insert(0.0, str(timetext))
-        time.sleep(1)
-        menu.deiconify()
-        database('sort', 'cocktail', size, round(end - start, 5), 'sdata', speed)
+        sorting_algs_func('cocktail', end, start, size, speed)
 
 def selected_search():
     global nEntry, ser_menu, data, size, speed_entry
