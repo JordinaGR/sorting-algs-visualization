@@ -46,12 +46,11 @@ There's a new database in .csv files, these files are useded by the sort_alg_men
 - ~~Be able to change speed and create the Entry on sort_alg_noDB~~
 - ~~More options to generate data~~
 - ~~Button to save the data and use it later~~
-- Rearrange the menu controls
+- ~~Rearrange the menu controls~~
 - ~~Shell sort~~
 - ~~Button to show database information in a different window~~
 - ~~Radix sort~~
 
-Thanks for checking it out.
 
 # Català
 ____________________________________________________________________________________________________________________________

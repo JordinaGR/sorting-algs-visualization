@@ -127,14 +127,14 @@ def quit_func():
 def database(algtype, alg, size, sec, sdata, speed):
     # open the file and add a row in the corresponding database
     if algtype == 'sort':
-        dfso = '/home/jordina/Desktop/programes python/sorting_alg/db/sortdata.csv'
+        dfso = 'sorting-algs-visualization/db/sortdata.csv'
         with open(dfso, 'a') as df:
             w = csv.writer(df)
             w.writerow([alg, size, sec, speed])
 
 
     elif algtype == 'search':
-        dfse = '/home/jordina/Desktop/programes python/sorting_alg/db/searchdata.csv'
+        dfse = 'sorting-algs-visualization/db/searchdata.csv'
         with open(dfse, 'a') as df:
             w = csv.writer(df)
             w.writerow([alg, size, sec, sdata, speed])
@@ -246,7 +246,6 @@ def selected_search():
         crono.insert(0.0, 'The data is not in here \n')
 
     else:
-
         if ser_menu.get() == "Linear Search":
             start = time.perf_counter()         # start timer
             linear(data, n, drawdata, speed)    # call the function

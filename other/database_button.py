@@ -28,8 +28,8 @@ def grid(filee):        # create the grid where the data is going to be showed
 def database_func(count):    # main function
 
     # open the .csv files
-    file1 = '/home/jordina/Desktop/programes python/sorting_alg/db/sortdata.csv'
-    file2 = '/home/jordina/Desktop/programes python/sorting_alg/db/searchdata.csv'
+    file1 = 'sorting-algs-visualization/db/sortdata.csv'
+    file2 = 'sorting-algs-visualization/db/searchdata.csv'
 
     # start a window
     root = Tk()
