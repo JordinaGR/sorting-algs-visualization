@@ -25,21 +25,14 @@ from pre import pre5
 import pandas as pd
 
 # start a tkinter window
-menu = Tk()
 root = Tk()
-widthr = root.winfo_screenwidth()
-heightr = root.winfo_screenheight()
+widthr = 1700
+heightr = 850
 
 # set minsize
-menu.minsize(400, 200)
-menu.config(bg="lightblue1")
-menu.title("Sorting algorithms visualization menu")
-
-root.maxsize(root.winfo_screenwidth(), root.winfo_screenheight())
-root.minsize(root.winfo_screenwidth(), root.winfo_screenheight())
-root.config(bg="black")
+root.minsize(1600, 850)
+root.config(bg="white")
 root.title("Sorting algorithms visualization")
-
 
 # vars
 selected_alg = StringVar()
@@ -58,11 +51,9 @@ savedArr = []
 
 # draw the rectangles
 def drawdata(data, colorarray):
-    global widthr, heightr
-
     canvas.delete("all")
-    c_height = (heightr/3.25)*3
-    c_width = widthr
+    c_height = 700
+    c_width = 1600
     x_width = c_width / (len(data) + 1)
     offset = 0
     spacing = 0
@@ -70,7 +61,7 @@ def drawdata(data, colorarray):
 
     for i, height in enumerate(normalizeddata):
         x0 = i * x_width + offset + spacing
-        y0 = c_height - height * ((heightr/2.3)+(heightr/2.3))
+        y0 = c_height - height * c_height
         x1 = (i+1) * x_width + offset
         y1 = c_height
 
@@ -92,7 +83,7 @@ def generate():
     # check if there's a default set selectet, if it is, append that data to the list
     pre_dict = {'Pre':pre, 'Pre1':pre1, 'Pre2':pre2, 'Pre3':pre3, 'Pre4':pre4, 'Pre5':pre5}
 
-    if pre_det.get() != 'No':
+    if pre_det.get() != 'No Default':
         which_pre = pre_det.get()
 
         for u in pre_dict.get(which_pre):
@@ -152,7 +143,6 @@ def sorting_algs_func(alg_name, end, start, size, speed):
     timetext = str(f'{alg_name} {size} en {round(end - start, 5)} \n')
     crono.insert(0.0, str(timetext))
     time.sleep(1)
-    menu.deiconify() 
     database('sort', alg_name, size, round(end - start, 5), 'sdata', speed)
 
 
@@ -160,7 +150,6 @@ def Start_alg():
     global data, size, crono, speed_entry
 
     if checkvar.get() == 1:
-        menu.iconify()
         time.sleep(1)
 
     try:
@@ -206,7 +195,7 @@ def Start_alg():
         end = time.perf_counter()
         sorting_algs_func('optibubble', end, start, size, speed)
 
-    elif alg_menu.get() == "Random Sort":
+    elif alg_menu.get() == "Bogo Sort":
         start = time.perf_counter()
         random_sorts(data, drawdata, speed)
         end = time.perf_counter()
@@ -217,7 +206,7 @@ def Start_alg():
         shell(data, drawdata, speed)
         end = time.perf_counter()
         drawdata(data, ['green' for x in range(len(data))])
-        sorting_algs_func('bogo', end, start, size, speed)
+        sorting_algs_func('shell', end, start, size, speed)
 
     elif alg_menu.get() == "Counting Sort":
         start = time.perf_counter()
@@ -258,18 +247,12 @@ def selected_search():
 
     else:
 
-        if checkvar.get() == 1:
-            menu.iconify()
-            time.sleep(1)
-
         if ser_menu.get() == "Linear Search":
             start = time.perf_counter()         # start timer
             linear(data, n, drawdata, speed)    # call the function
             end = time.perf_counter()           # stop timer
             timetext = str(f'Linear {n}, {size} en {round(end - start, 4)} \n')
             crono.insert(0.0, str(timetext))    # write the times in the screen
-            time.sleep(1)
-            menu.deiconify() 
             database('search', 'linear', size, round(end - start, 5), n, speed)
 
         elif ser_menu.get() == "Binary Search":
@@ -278,8 +261,6 @@ def selected_search():
             end = time.perf_counter()
             timetext = str(f'Binary {n}, {size} en {round(end - start, 5)} \n')
             crono.insert(0.0, str(timetext))
-            time.sleep(1)
-            menu.deiconify()
             database('search', 'binary', size, round(end - start, 5), n, speed)
 
         elif ser_menu.get() == "Exponential Search":
@@ -288,8 +269,6 @@ def selected_search():
             end = time.perf_counter()
             timetext = str(f'Exponential {n}, {size} en {round(end - start, 5)} \n')
             crono.insert(0.0, str(timetext))
-            time.sleep(1)
-            menu.deiconify()
             database('search', 'exponential', size, round(end - start, 5), n, speed)
 
 def save_func():        # a function to save the array in a button and use it on the use_func
@@ -314,70 +293,66 @@ def dbinfo():   # open the new window with the database information
 
 
 # frames
-canvas = Canvas(root, width=widthr, height=heightr, bg="white")
-canvas.grid(row=2, column=0, padx=10, pady=2)
+canvas = Canvas(root, width=1600, height=700, bg="white")
+canvas.place(x=0, y=150)
 
 # ui
-Label(menu, text="Algs:", bg="lightblue1").grid(row=0, column=0, padx=0, pady=0)
-alg_menu = Combobox(menu, textvariable=selected_alg, values=['No' , 'Bubble Sort', 'Opti Bubble Sort', 'Random Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Shell Sort', 'Counting Sort', 'Radix Sort', 'Cocktail Sort'])
-alg_menu.grid(row=0, column=1, padx=2, pady=2)
+alg_menu = Combobox(root, width=15, textvariable=selected_alg, values=['Algs' , 'Bubble Sort', 'Opti Bubble Sort', 'Bogo Sort', 'Selection Sort', 'Insertion Sort', 'Quick Sort', 'Merge Sort', 'Shell Sort', 'Counting Sort', 'Radix Sort', 'Cocktail Sort'])
+alg_menu.place(x=290, y=20)
 alg_menu.current([0])
-Button(menu, text='Create', font=("arial", 13), command=generate, bg='white').grid(row=0, column=2, padx=5, pady=5)
-
-Label(menu, text="Search:", bg="lightblue1").grid(row=1, column=0, padx=5, pady=5)
-ser_menu = Combobox(menu, textvariable=selected_search, values=['No' ,'Linear Search', 'Binary Search', 'Exponential Search'])
-ser_menu.grid(row=1, column=1, padx=2, pady=2)
+ser_menu = Combobox(root, width=15, textvariable=selected_search, values=['Search Alg' ,'Linear Search', 'Binary Search', 'Exponential Search'])
+ser_menu.place(x=290, y=50)
 ser_menu.current([0])
+Label(root, text="Search this: ", bg='white').place(x=290, y=90)
 #ser_menu.current(2) # delete this after testing
-nEntry = Entry(menu, width=10)
-nEntry.grid(row=1, column=2, padx=2, pady=2, sticky=W)
+nEntry = Entry(root, width=10)
+nEntry.place(x=390, y=90)
 #nEntry.insert(END, 30) #delete this after testing
 
-Label(menu, text="Number of data: ", bg='lightblue1').grid(row=2, column=0, padx=5, pady=5, sticky=W)
-sizeEntry = Entry(menu, width=15)
-sizeEntry.grid(row=2, column=1, padx=2, pady=2, sticky=W)
+order = Button(root, text='Order', font=("arial", 12), command=Start_alg, bg='red')
+order.place(x=440, y=15)
+order = Button(root, text=' Find ', font=("arial", 12),command=selected_search, bg='red')
+order.place(x=440, y=50)
 
-pre_det = Combobox(menu, textvariable=dades_pre, values=['No', 'Pre', 'Pre1', 'Pre2', 'Pre3', 'Pre4', 'Pre5'])
-pre_det.grid(row=1, column=3, padx=2, pady=2)
+Label(root, text="# data: ", bg='white').place(x=50, y=20)
+sizeEntry = Entry(root, width=15)
+sizeEntry.place(x=110, y=20)
+
+Button(root, text='Create', font=("arial", 12), command=generate, bg='white').place(x=160, y=80)
+
+pre_det = Combobox(root, width=10, textvariable=dades_pre, values=['No Default', 'Pre', 'Pre1', 'Pre2', 'Pre3', 'Pre4', 'Pre5'])
+pre_det.place(x=50, y=90)
 pre_det.current([0])
 #pre_det.current(1) # delete this after testing
 
-crono = Text(menu, width=35, height=6, state='normal')
-crono.grid(row=0, column=3)
+#Text widget
+crono = Text(root, width=35, height=6, state='normal')
+crono.place(x=1200, y=20)
 
-order = Button(menu, text='Order!', font=("arial", 18), command=Start_alg, bg='red')
-order.grid(row=2, column=2, padx=2, pady=2)
-order = Button(menu, text='Find', font=("arial", 18), command=selected_search, bg='red')
-order.grid(row=2, column=3, padx=2, pady=2)
+Label(root, text="Speed:", bg='white').place(x=50, y=50)
+speed_entry = Entry(root, width=15)
+speed_entry.place(x=110, y=50)
 
-Label(menu, text="      Speed:", bg='lightblue1').grid(row=3, column=0, padx=5, pady=5, sticky=W)
-speed_entry = Entry(menu, width=15)
-speed_entry.grid(row=3, column=1, padx=2, pady=2, sticky=W)
 
-Label(menu, text="Data mode:", bg='lightblue1').grid(row=3, column=2, padx=5, pady=5, sticky=W)
-datamode_comb = Combobox(menu, textvariable=datamode_var, values=['Normal','Random', 'Repited', 'Inverted'])
+Label(root, text="Data mode:", bg='white').place(x=600, y=20)
+datamode_comb = Combobox(root, width=10, textvariable=datamode_var, values=['Normal','Random', 'Repited', 'Inverted'])
 datamode_comb.current(0)
-datamode_comb.grid(row=3, column=3, padx=2, pady=2, sticky=W)
+datamode_comb.place(x=700, y=20)
 
-repited_times = Entry(menu, width=15)
-repited_times.grid(row=3, column=4, padx=2, pady=2, sticky=W)
+Label(root, text="if repided, times?", bg="white").place(x=600, y=50)
+repited_times = Entry(root, width=15)
+repited_times.place(x=720, y=50)
 
-quit_but = Button(menu, text='Quit', font=("arial", 18), command=quit_func, bg='yellow')
-quit_but.grid(row=0, column=4, padx=2, pady=2)
+quit_but = Button(root, text='Quit', font=("arial", 12), command=quit_func, bg='red')
+quit_but.place(x=1100, y=15)
 
-save_but = Button(menu, text='Save', font=("arial", 18), command=save_func, bg='green')
-save_but.grid(row=0, column=5, padx=2, pady=2)
+save_but = Button(root, text='Save', font=("arial", 12), command=save_func, bg='red')
+save_but.place(x=900 ,y=15)
 
-use_but = Button(menu, text='Use', font=("arial", 18), command=use_func, bg='green')
-use_but.grid(row=1, column=5, padx=2, pady=2)
+use_but = Button(root, text=' Use ', font=("arial", 12), command=use_func, bg='red')
+use_but.place(x=900, y=50)
 
-database_info_but = Button(menu, text='Database', font=('arial', 18), command=dbinfo, bg='royalblue1')
-database_info_but.grid(row=2, column=5, padx=2, pady=2)
+database_info_but = Button(root, text='Database', font=('arial', 12), command=dbinfo, bg='red')
+database_info_but.place(x=980, y=15)
 
-checkbox_wind = Checkbutton(menu, text='Minimize?', variable=checkvar, onvalue=1, offvalue=0, heigh=5, width=20, bg='lightblue1')
-checkbox_wind.config(activebackground='lightblue2')
-
-checkbox_wind.grid(row=2, column=4)
-
-menu.mainloop()
 root.mainloop()
