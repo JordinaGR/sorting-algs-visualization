@@ -10,6 +10,8 @@ Vids showing how it works (DD/MM/YYYY):
 
 4. 03/02/2021 version #4: https://youtu.be/Nc4NOI1vlrQ
 
+5. 01/08/2021 version #5: https://youtu.be/fRDp73723Z8
+
 Sorting and searching algorithms visualization with python 3.8 and tkinter. The purpose of this is the algorithm implementation.
 
 There is a timer and the data gets stored in MySQL database. So, I can compare between algorithms doing some statistics. There are two tables, the sorting and the serching algs.
@@ -39,17 +41,6 @@ There's a new database in .csv files, these files are useded by the sort_alg_cle
 - Linear search
 - Binary search
 - Exponential search
-
-
-###### To do list:
-- ~~Create a separate menu window in another file~~
-- ~~Be able to change speed and create the Entry on sort_alg_noDB~~
-- ~~More options to generate data~~
-- ~~Button to save the data and use it later~~
-- ~~Rearrange the menu controls~~
-- ~~Shell sort~~
-- ~~Button to show database information in a different window~~
-- ~~Radix sort~~
 
 
 # Català
