@@ -1,3 +1,4 @@
+from itertools import count
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
@@ -7,6 +8,7 @@ def mouse_wheel(event):     # bind the mouse wheel to the scroll bar
     global count
 
     def delta(event):
+        global count
         if event.num == 5 or event.delta < 0:
             return -1 
         return 1 
@@ -28,8 +30,8 @@ def grid(filee):        # create the grid where the data is going to be showed
 def database_func(count):    # main function
 
     # open the .csv files
-    file1 = 'sorting-algs-visualization/db/sortdata.csv'
-    file2 = 'sorting-algs-visualization/db/searchdata.csv'
+    file1 = '/home/jordina/Desktop/new_programming/sorting-algs-visualization/db/sortdata.csv'
+    file2 = '/home/jordina/Desktop/new_programming/sorting-algs-visualization/db/searchdata.csv'
 
     # start a window
     root = Tk()

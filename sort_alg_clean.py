@@ -1,4 +1,6 @@
-import os, time, csv, random
+from concurrent.futures import thread
+from glob import glob
+import os, time, csv, random, sys, threading
 from tkinter import *
 from tkinter.ttk import Combobox
 from algs.bubble_sort import bubble_sort
@@ -121,8 +123,7 @@ def generate():
     drawdata(data, ['black' for x in range(len(data)+1)]) # call the drawdata function and create the squares
 
 def quit_func():
-    quit()
-
+    root.destroy()
 
 def database(algtype, alg, size, sec, sdata, speed):
     # open the file and add a row in the corresponding database
@@ -131,7 +132,6 @@ def database(algtype, alg, size, sec, sdata, speed):
         with open(dfso, 'a') as df:
             w = csv.writer(df)
             w.writerow([alg, size, sec, speed])
-
 
     elif algtype == 'search':
         dfse = 'sorting-algs-visualization/db/searchdata.csv'
@@ -144,7 +144,6 @@ def sorting_algs_func(alg_name, end, start, size, speed):
     crono.insert(0.0, str(timetext))
     time.sleep(1)
     database('sort', alg_name, size, round(end - start, 5), 'sdata', speed)
-
 
 def Start_alg():
     global data, size, crono, speed_entry
@@ -288,9 +287,11 @@ def use_func():         # save the data that the save_func has saved
 
 def dbinfo():   # open the new window with the database information
     from other.database_button import database_func
-    database_func()
+    database_func(0)
 
 
+#1700
+#850
 # frames
 canvas = Canvas(root, width=1600, height=700, bg="white")
 canvas.place(x=0, y=150)
@@ -304,14 +305,14 @@ ser_menu.place(x=290, y=50)
 ser_menu.current([0])
 Label(root, text="Search this: ", bg='white').place(x=290, y=90)
 #ser_menu.current(2) # delete this after testing
-nEntry = Entry(root, width=10)
+nEntry = Entry(root, width=14)
 nEntry.place(x=390, y=90)
 #nEntry.insert(END, 30) #delete this after testing
 
 order = Button(root, text='Order', font=("arial", 12), command=Start_alg, bg='red')
 order.place(x=440, y=15)
-order = Button(root, text=' Find ', font=("arial", 12),command=selected_search, bg='red')
-order.place(x=440, y=50)
+findbutton = Button(root, text=' Find ', font=("arial", 12),command=selected_search, bg='red')
+findbutton.place(x=440, y=50)
 
 Label(root, text="# data: ", bg='white').place(x=50, y=20)
 sizeEntry = Entry(root, width=15)
@@ -331,7 +332,6 @@ crono.place(x=1200, y=20)
 Label(root, text="Speed:", bg='white').place(x=50, y=50)
 speed_entry = Entry(root, width=15)
 speed_entry.place(x=110, y=50)
-
 
 Label(root, text="Data mode:", bg='white').place(x=600, y=20)
 datamode_comb = Combobox(root, width=10, textvariable=datamode_var, values=['Normal','Random', 'Repited', 'Inverted'])
